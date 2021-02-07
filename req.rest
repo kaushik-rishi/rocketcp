@@ -1,0 +1,10 @@
+@base=http://localhost:10045
+
+POST {{base}}/hello
+Content-Type: application/json
+
+{
+    "lolly": "lol"
+}
+
+

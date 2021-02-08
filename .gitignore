@@ -2,6 +2,9 @@
 .vscode/
 .idea/
 
+# testing folder -> testing the make file and stuff
+# testing/
+
 # Logs
 logs
 *.log

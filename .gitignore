@@ -2,6 +2,9 @@
 .vscode/
 .idea/
 
+# Girlscript form registration details
+girlscript.p
+
 # testing folder -> testing the make file and stuff
 # testing/
 

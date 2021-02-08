@@ -33,6 +33,11 @@ Things to figure out (way above my head as of now):
         - [ ] Deep dive into the network tab
 - [ ] If it is that the extension is developed incorporate usage of advanced DOM manipulations and web scraping and parsing and extend the extension to many other sites
 
+--------------------
+Dependencies:
+- [ ] Aim to use the least dependencies and Especially not use a web framework and build the application using vanilla node js
+- [ ] **mkdirp** - Will rewrite after studying more about path lib and seperators and POSIX and NON POSIX URL Like paths
+
 Recall:
 - Donot involve complexities like using env variables at the start
 - Make a working version and then focus on refactoring and abstraction

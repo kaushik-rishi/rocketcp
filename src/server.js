@@ -1,21 +1,63 @@
+#!/usr/bin/env node
+
 const http = require('http');
 const os = require('os');
 const path = require('path');
-const { touchp } = require('./touchp');
+const mkdirp = require('mkdirp');
+const fs = require('fs');
 
-const HOME = (os.userInfo().homedir);
-const ROOT = path.join(HOME, 'competitivecoding');
-const FILE_EXT = ".cpp";
+const fileUtils = require('./fileUtils');
+
+const HOME = (os.userInfo().homedir),
+	  ROOT = path.join(HOME, 'competitivecoding'),
+	  TEMPLATES = path.join(HOME, '.cptemplates'),
+	  FILE_EXT = ".cpp",
+	  TEMPLATE_PATH = path.join(TEMPLATES, 'main') + FILE_EXT;
+
+templateContent = fs.existsSync(TEMPLATE_PATH) ? fs.readFileSync(TEMPLATE_PATH).toString() : '';
 
 const server = http.createServer((req, res) => {
     let bodyBuffer = '';
     req.on('data', (chunk) => bodyBuffer += chunk)
 
-    req.on('end', () => {
+    req.on('end', async () => {
         const data = JSON.parse(bodyBuffer.toString());
-        const { group: contestName, name: problemName, url: problemUrl } = data,
-            problemCode = problemUrl.split('/').pop();
-        touchp(path.join(ROOT, contestName, problemCode + FILE_EXT));
+        let problemMetaData;
+
+        let {
+        	name: problemName,
+        	group: folderName,
+        	url: problemUrl,
+        	tests: tests,
+        	interactive: interactive,
+            timeLimit: timeLimit,
+            memoryLimit: memoryLimit,
+        } = data;
+
+        interactive ? interactive = 'interactive-' : interactive = '';
+
+        folderName = folderName.split('-').pop().trim();
+
+        problemMetaData =
+        `Name of problem: ${problemName}\nContest: ${folderName}\nLink to problem: ${problemUrl}\nTime Limit: ${timeLimit/1000} second(s)\nMemory Limit: ${memoryLimit} mb`;
+
+        // adding comments to the metadata [BUG: added incrementally]
+        problemMetaData = '/*\n' + problemMetaData;
+        problemMetaData = problemMetaData + '\n*/\n';
+
+        let contestDir = path.join(ROOT, folderName);
+        let problemDir = path.join(contestDir, problemName);
+
+        // returns the path from onward which the directories are made
+    	mkdirp.sync(problemDir);
+
+    	let problemCode = problemName.split(' ')[0][0].trim();
+
+        tests.forEach((test, index) => {
+        	fileUtils.write(problemDir, problemCode + FILE_EXT, problemMetaData + templateContent);
+        	fileUtils.createWrite(problemDir, `${interactive}in${index+1}.txt`, test.input);
+        	fileUtils.createWrite(problemDir, `${interactive}out${index+1}.txt`, test.output);
+        });
     });
 });
 

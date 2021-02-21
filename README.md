@@ -13,20 +13,25 @@ Usage [As of development stage]:
 Checklist:
 - [x] Parse the post request data from the extension
 - [x] Create files for the problems recieved
-- [ ] Change the file creation into folder creation with a Makefile
+- [x] Change the file creation into folder creation
+- [ ] Make a template directory and copy the template
+    - Template Checklist:
+        - [ ] add the problem metadata on the top of the problem file
+        - [ ] add only the metadata if template not found
+- [ ] Create make file for each folder
     - Makefile Checklist:
         - [ ] run the program agains the test cases 
         - [ ] show the difference in a user readable format (chalk for node js coloring/ bash based coloring)
-- [ ] Make a template directory and copy the template
-    - Template Checklist:
-        - [ ] add the problem metadata on the top of the problem file [modify the touchp file by passing in the metadata in the form of object]
+        - [ ] Can we have a Makefile in a directory and then use that makefile for all the sub folders [ may be have smaller make files in each sub dir ] - Aim: memory efficient
+- [ ] 
 - [ ] Config files storing user preferences
 - [ ] Ship a binary instead of running the commands using node js. Refer cftool for example (or atleast a npm package that can be installed globally)
 
 Things to figure out (way above my head as of now):
 - [ ] Running the js script from inside the problem directory
+	- [ ] May be use a hash bang `#/usr/bin/env node` and link the file to `bin` using `ln`
 - [ ] Making a npm package that can be installed globally ??
-- [ ] Make an extension like competitive companion 😁 for codechef and codeforces
+- [ ] Make an extension like `competitive companion` for codechef and codeforces
 - [ ] Submit the problem to cf from the cli. 
     - Network checklist:
         - [ ] Check and understand the csrf token stuff
@@ -34,13 +39,15 @@ Things to figure out (way above my head as of now):
 - [ ] If it is that the extension is developed incorporate usage of advanced DOM manipulations and web scraping and parsing and extend the extension to many other sites
 
 --------------------
-Dependencies:
+### Dependencies:
 - [ ] Aim to use the least dependencies and Especially not use a web framework and build the application using vanilla node js
-- [ ] **mkdirp** - Will rewrite after studying more about path lib and seperators and POSIX and NON POSIX URL Like paths
+- [ ] **mkdirp** - Will rewrite after studying more about path library and seperators and POSIX and NON POSIX URL Like paths
+- [ ] Prefer having less dependencies to having less SLOC
 
-Recall:
+### Recall:
 - Donot involve complexities like using env variables at the start
+- Think of cross platformeness later
 - Make a working version and then focus on refactoring and abstraction
 
-Techinal details used:
+### Technical details used:
 - PORT for listening to post requests from the extension: 10045

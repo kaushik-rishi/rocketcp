@@ -18,10 +18,10 @@ Usage [As of development stage]:
 - [x] Parse the post request data from the extension
 - [x] Create files for the problems recieved
 - [x] Change the file creation into folder creation
-- [ ] Make a template directory and copy the template
+- [x] Make a template directory and copy the template
     - Template Checklist:
-        - [ ] add the problem metadata on the top of the problem file
-        - [ ] add only the metadata if template not found
+        - [x] add the problem metadata on the top of the problem file
+        - [x] add only the metadata if template not found
 - [ ] Create make file for each folder
     - Makefile Checklist:
         - [ ] run the program agains the test cases 

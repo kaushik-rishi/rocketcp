@@ -16,6 +16,18 @@ const HOME = (os.userInfo().homedir),
 
 templateContent = fs.existsSync(TEMPLATE_PATH) ? fs.readFileSync(TEMPLATE_PATH).toString() : '';
 
+function saveSamples(problemDir, sampleTests) {
+    sampleTests.forEach((test, index) => {
+        fileUtils.createWrite(problemDir, `${interactive}in${index+1}.txt`, test.input);
+        fileUtils.createWrite(problemDir, `${interactive}out${index+1}.txt`, test.output);
+    });
+}
+
+function getProblemCode(problemName) {
+    // TODO: make the problem codes based on different cp platforms
+    return problemName.split(' ')[0][0].trim();
+}
+
 const server = http.createServer((req, res) => {
     let bodyBuffer = '';
     req.on('data', (chunk) => bodyBuffer += chunk)
@@ -28,7 +40,7 @@ const server = http.createServer((req, res) => {
         	name: problemName,
         	group: folderName,
         	url: problemUrl,
-        	tests: tests,
+        	tests: sampleTests,
         	interactive: interactive,
             timeLimit: timeLimit,
             memoryLimit: memoryLimit,
@@ -42,8 +54,8 @@ const server = http.createServer((req, res) => {
         `Name of problem: ${problemName}\nContest: ${folderName}\nLink to problem: ${problemUrl}\nTime Limit: ${timeLimit/1000} second(s)\nMemory Limit: ${memoryLimit} mb`;
 
         // adding comments to the metadata [BUG: added incrementally]
-        problemMetaData = '/*\n' + problemMetaData;
-        problemMetaData = problemMetaData + '\n*/\n';
+        // TODO: add comments based on language
+        problemMetaData = '/*\n' + problemMetaData + '\n*/\n';
 
         let contestDir = path.join(ROOT, folderName);
         let problemDir = path.join(contestDir, problemName);
@@ -51,13 +63,13 @@ const server = http.createServer((req, res) => {
         // returns the path from onward which the directories are made
     	mkdirp.sync(problemDir);
 
-    	let problemCode = problemName.split(' ')[0][0].trim();
+    	let problemCode = getProblemCode(problemName);
 
-        tests.forEach((test, index) => {
-        	fileUtils.write(problemDir, problemCode + FILE_EXT, problemMetaData + templateContent);
-        	fileUtils.createWrite(problemDir, `${interactive}in${index+1}.txt`, test.input);
-        	fileUtils.createWrite(problemDir, `${interactive}out${index+1}.txt`, test.output);
-        });
+        // make a source code file for the problem in cpp and copy the template
+    	fileUtils.write(problemDir, problemCode + FILE_EXT, problemMetaData + templateContent);
+
+        // save the test case files
+        saveSamples(problemDir, sampleTests);
     });
 });
 

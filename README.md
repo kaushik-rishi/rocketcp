@@ -10,7 +10,11 @@ Usage [As of development stage]:
 
 ---------------
 
-Checklist:
+### Note:
+- I don't have much knowledge about wether the file operations should be synchronous or asynchronous.
+- I'm trying to keep most of the (infact all of the) functions as synchronous.
+
+### Checklist:
 - [x] Parse the post request data from the extension
 - [x] Create files for the problems recieved
 - [x] Change the file creation into folder creation

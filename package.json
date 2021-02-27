@@ -1,10 +1,22 @@
 {
-  "name": "competitive-companion-data",
+  "name": "rocket-cp",
   "version": "1.0.0",
+  "description": "<p align=\"center\"><img src=\"https://media0.giphy.com/media/f6hnhHkks8bk4jwjh3/giphy.gif\" align=\"center\" width=\"200\"></p> <h1 align=\"center\">Rocket Competitive Programming</h1>",
   "main": "index.js",
-  "license": "MIT",
+  "scripts": {
+  	"devStart": "src/server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kaushik-rishi/rocketcp.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/kaushik-rishi/rocketcp/issues"
+  },
+  "homepage": "https://github.com/kaushik-rishi/rocketcp#readme",
   "dependencies": {
-    "express": "^4.17.1",
     "mkdirp": "^1.0.4"
   }
 }

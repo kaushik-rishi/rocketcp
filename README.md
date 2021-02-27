@@ -55,3 +55,4 @@ Things to figure out (way above my head as of now):
 
 ### Technical details used:
 - PORT for listening to post requests from the extension: 10045
+- `shebang`: `#!/usr/bin/env node`

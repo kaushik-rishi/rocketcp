@@ -5,6 +5,10 @@
 # Girlscript form registration details
 girlscript.p
 
+# to learn -> not to show in public
+TOLEARN.md
+TOIMPROVE.md
+
 # testing folder -> testing the make file and stuff
 # testing/
 

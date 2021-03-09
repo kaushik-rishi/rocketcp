@@ -65,7 +65,9 @@ Things to figure out (way above my head as of now):
 <Issue title> #Issue id
 For example - Embed a Makefile into each problem folder #10 
 - Please use following commit message template during working on assigned issue:
-```[Issue#Issueid]Summarize the change in less than 50 characters
+
+```
+[Issue#Issueid]Summarize the change in less than 50 characters
 
 Because:
 - Explain the reasons you made this change
@@ -75,7 +77,8 @@ Because:
 
 For example:
 
-```[Issue#10] Added Make File With Two Test Cases
+```
+[Issue#10] Added Make File With Two Test Cases
 
 Because:
 - To start implementation of extra feature.

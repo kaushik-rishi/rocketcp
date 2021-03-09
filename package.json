@@ -18,6 +18,7 @@
   },
   "homepage": "https://github.com/kaushik-rishi/rocketcp#readme",
   "dependencies": {
+    "ejs": "^3.1.6",
     "mkdirp": "^1.0.4"
   }
 }

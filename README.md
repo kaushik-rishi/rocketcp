@@ -56,3 +56,27 @@ Things to figure out (way above my head as of now):
 ### Technical details used:
 - PORT for listening to post requests from the extension: 10045
 - `shebang`: `#!/usr/bin/env node`
+
+### For GSSOC'21 Participants
+- [Watch Project Introduction Video] (https://youtu.be/3hCQKaUxKRQ)
+- Please first go through our [Code Of Conduct] (https://github.com/kaushik-rishi/rocketcp/blob/develop/CODE_OF_CONDUCT.md) and [Contribution Guidelines] (https://github.com/kaushik-rishi/rocketcp/blob/develop/CONTRIBUTING.md)
+- Please use following template for PR:
+<Issue title> #Issue id
+For example - Embed a Makefile into each problem folder #10 
+- Please use following commit message template during working on assigned issue:
+```[Issue#Issueid]Summarize the change in less than 50 characters
+
+Because:
+- Explain the reasons you made this change
+- Make a new bullet for each reason
+- Each line should be under 72 characters
+```
+
+For example:
+
+```[Issue#10] Added Make File With Two Test Cases
+
+Because:
+- To start implementation of extra feature.
+```
+- In case of any concern and queries feel free to ping us in assigned discord channels.

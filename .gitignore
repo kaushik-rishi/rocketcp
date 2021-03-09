@@ -2,6 +2,8 @@
 .vscode/
 .idea/
 
+assets_private/
+
 # Girlscript form registration details
 girlscript.p
 

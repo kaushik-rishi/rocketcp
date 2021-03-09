@@ -60,6 +60,7 @@ Things to figure out (way above my head as of now):
 ### For GSSOC'21 Participants
 - [Watch Project Introduction Video](https://youtu.be/3hCQKaUxKRQ)
 - Please first go through our [Code Of Conduct](https://github.com/kaushik-rishi/rocketcp/blob/develop/CODE_OF_CONDUCT.md) and [Contribution Guidelines](https://github.com/kaushik-rishi/rocketcp/blob/develop/CONTRIBUTING.md)
+
 - Please use following template for PR:
 <Issue title> #Issue id
 For example - Embed a Makefile into each problem folder #10 

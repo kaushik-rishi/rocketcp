@@ -68,6 +68,7 @@ const server = http.createServer((req, res) => {
 
         // returns the path from onward which the directories are made
         mkdirp.sync(problemDir);
+        console.log(`Created a directory for the problem ${problemName} => ${problemDir}`);
 
         problemMetaData = `Name of problem: ${problemName}\nContest: ${folderName}\nLink to problem: ${problemUrl}\nTime Limit: ${timeLimit / 1000} second(s)\nMemory Limit: ${memoryLimit} mb`;
         problemMetaData = commentifyMetaData(problemMetaData);

@@ -2,7 +2,7 @@ RED=\033[0;31m
 Green=\033[0;32m
 NC=\033[0m
 run:
-	g++ main.cpp -o main.exe;
+	g++ main.cpp -o main.exe -std=gnu++11;
 	@printf "${Green}Successfully Compiled${NC} \n\n"; 
 	@./main.exe < 1.in > temp.txt;
 	@diff -Z -B temp.txt 1.out; \

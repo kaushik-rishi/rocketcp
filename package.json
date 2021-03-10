@@ -8,7 +8,8 @@
     "devStart": "nodemon src/server.js",
     "start": "node src/server.js",
     "lint": "prettier --check .",
-    "format": "prettier --write ."
+    "format": "prettier --write .",
+    "husky-talisman": "husky-talisman"
   },
   "prettier": {
     "singleQuote": true,
@@ -26,10 +27,12 @@
   },
   "homepage": "https://github.com/kaushik-rishi/rocketcp#readme",
   "dependencies": {
+    "ejs": "^3.1.6",
     "mkdirp": "^1.0.4"
   },
   "devDependencies": {
     "husky": "^5.1.3",
+    "husky-talisman": "^2.0.1",
     "prettier": "2.2.1"
   }
 }

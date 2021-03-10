@@ -1,0 +1,15 @@
+RED=\033[0;31m
+Green=\033[0;32m
+NC=\033[0m
+run:
+	g++ <%= program %> -o main.exe -std=gnu++11;
+	@printf "${Green}Successfully Compiled${NC} \n\n"; 
+	<% for(var i=0; i < testcases.length; i++) { %>@./main.exe < <%= testcases[i].input %> > temp.txt;
+	@diff -Z -B temp.txt <%= testcases[i].output %>; \
+	RETVAL=$$?; \
+	if [ $$RETVAL -eq 0 ]; then \
+		printf "${Green}Test Case <%= i+1 %>  Passed${NC} \n\n"; \
+	else \
+		printf "${RED}Test Case <%= i+1 %> Failed${NC} \n\n"; \
+	fi
+	<% } %>

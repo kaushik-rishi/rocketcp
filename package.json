@@ -10,11 +10,6 @@
     "lint": "prettier --check .",
     "format": "prettier --write ."
   },
-  "husky": {
-    "hooks": {
-      "pre-commit": "npm run format && git add -A ."
-    }
-  },
   "prettier": {
     "singleQuote": true,
     "semi": false,

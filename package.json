@@ -2,9 +2,10 @@
   "name": "rocket-cp",
   "version": "1.0.0",
   "description": "<p align=\"center\"><img src=\"https://media0.giphy.com/media/f6hnhHkks8bk4jwjh3/giphy.gif\" align=\"center\" width=\"200\"></p> <h1 align=\"center\">Rocket Competitive Programming</h1>",
-  "main": "index.js",
+  "main": "src/server.js",
   "scripts": {
-    "devStart": "src/server.js"
+    "devStart": "nodemon src/server.js",
+    "start": "node src/server.js"
   },
   "repository": {
     "type": "git",

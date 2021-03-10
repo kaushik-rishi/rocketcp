@@ -4,15 +4,11 @@
   "description": "<p align=\"center\"><img src=\"https://media0.giphy.com/media/f6hnhHkks8bk4jwjh3/giphy.gif\" align=\"center\" width=\"200\"></p> <h1 align=\"center\">Rocket Competitive Programming</h1>",
   "main": "src/server.js",
   "scripts": {
+    "prepare": "husky install",
     "devStart": "nodemon src/server.js",
     "start": "node src/server.js",
     "lint": "prettier --check .",
     "format": "prettier --write ."
-  },
-  "husky": {
-    "hooks": {
-      "pre-commit": "npm run format && git add -A ."
-    }
   },
   "prettier": {
     "singleQuote": true,
@@ -30,6 +26,7 @@
   },
   "homepage": "https://github.com/kaushik-rishi/rocketcp#readme",
   "dependencies": {
+    "ejs": "^3.1.6",
     "mkdirp": "^1.0.4"
   },
   "devDependencies": {

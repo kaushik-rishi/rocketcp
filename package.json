@@ -14,6 +14,11 @@
       "pre-commit": "npm run format && git add -A ."
     }
   },
+  "prettier": {
+    "singleQuote": true,
+    "semi": false,
+    "trailingComma": "none"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/kaushik-rishi/rocketcp.git"

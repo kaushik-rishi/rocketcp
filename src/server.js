@@ -5,6 +5,7 @@ const os = require('os')
 const path = require('path')
 const mkdirp = require('mkdirp')
 const fs = require('fs')
+const ejs = require('ejs')
 
 const fileUtils = require('./fileUtils')
 
@@ -30,6 +31,7 @@ function commentifyMetaData(problemMetaData) {
 
 function saveSamples(problemDir, sampleTests, isInteractive) {
   let interactive = isInteractive ? 'interactive-' : ''
+  const testCases = []
   sampleTests.forEach((test, index) => {
     fileUtils.createWrite(
       problemDir,
@@ -41,7 +43,12 @@ function saveSamples(problemDir, sampleTests, isInteractive) {
       `${interactive}out${index + 1}.txt`,
       test.output
     )
+    testCases.push({
+      input: `${interactive}in${index + 1}.txt`,
+      output: `${interactive}out${index + 1}.txt`
+    })
   })
+  return testCases
 }
 
 function getProblemCode(problemName) {
@@ -60,7 +67,6 @@ const server = http.createServer((req, res) => {
 
   req.on('end', async () => {
     const data = JSON.parse(bodyBuffer.toString())
-
     let {
       name: problemName,
       group: folderName,
@@ -88,7 +94,6 @@ const server = http.createServer((req, res) => {
     problemMetaData = commentifyMetaData(problemMetaData)
 
     let problemCode = getProblemCode(problemName)
-
     // make a source code file for the problem in cpp and copy the template
     fileUtils.write(
       problemDir,
@@ -96,8 +101,24 @@ const server = http.createServer((req, res) => {
       problemMetaData + templateContent
     )
 
-    // save the test case files
-    saveSamples(problemDir, sampleTests, interactive)
+    // save and get the test case files
+    const testcases = saveSamples(problemDir, sampleTests, interactive)
+    // creating content for makefile
+    const makeFileContent = await new Promise((resolve, reject) => {
+      ejs.renderFile(
+        path.join(__dirname, '/templates/makefile.ejs'),
+        {
+          program: problemCode + FILE_EXT,
+          testcases
+        },
+        (err, content) => {
+          if (err) reject(err)
+          resolve(content)
+        }
+      )
+    })
+    // saving make file
+    fileUtils.write(problemDir, 'Makefile', makeFileContent)
   })
 })
 

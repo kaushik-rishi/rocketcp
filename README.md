@@ -1,4 +1,4 @@
-<p align="center"><img src="https://media0.giphy.com/media/f6hnhHkks8bk4jwjh3/giphy.gif" align="center" width="200"></p>
+﻿<p align="center"><img src="https://media0.giphy.com/media/f6hnhHkks8bk4jwjh3/giphy.gif" align="center" width="200"></p>
 <h1 align="center">Rocket Competitive Programming</h1>
 
 A command line client for parsing and making folders and files for test cases using the competitive companion extension and testing the solution. Building this with an 🎯 aim of making Competitive Programming More Productive
@@ -10,7 +10,7 @@ Usage [As of development stage]:
 <img src="./assets/demo.gif">
 
 ---
-
+#### Here is our discord server link  - [https://discord.gg/axfEwf6K](https://discord.gg/axfEwf6K)
 ### Note:
 
 - I don't have much knowledge about wether the file operations should be synchronous or asynchronous.
@@ -103,3 +103,4 @@ Because:
 ```
 
 - In case of any concern and queries feel free to ping us in assigned discord channels.
+

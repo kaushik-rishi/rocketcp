@@ -33,6 +33,7 @@
   "devDependencies": {
     "husky": "^5.1.3",
     "husky-talisman": "^2.0.1",
+    "nodemon": "^2.0.7",
     "prettier": "2.2.1"
   }
 }

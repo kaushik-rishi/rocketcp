@@ -6,7 +6,7 @@
 
 ### Who can use this tool?
 
-- The tool requires the extension to be installled on chrome first.
+- The tool requires the extension to be installed on chrome first.
 
 ### How to setup this tool ?
 
@@ -55,7 +55,7 @@ Take a look at existing issues at [our issue page](https://github.com/kaushik-ri
 ![NewIssue](https://github.com/GuptaTanisha/rocketcp/blob/newDocs/src/images/Issue_image.jpg)  
 
 - Add a suitable title and describe your issue. One can add screenshots or small gifs for demonstration. And then submit it.
-mall gifs for demonstration. And then submit it.
+
 
 
 

@@ -1,10 +1,13 @@
 RED=\033[0;31m
 Green=\033[0;32m
 NC=\033[0m
-run:
-	g++ <%= program %> -o main.exe -std=gnu++11;
+Blue=\033[1;34m
+Grey=\033[0;37m
+run: <%= defaultLang %> 
+cpp:
+	g++ Main.cpp -o o.exe -std=gnu++11;
 	@printf "${Green}Successfully Compiled${NC} \n\n"; 
-	<% for(var i=0; i < testcases.length; i++) { %>@./main.exe < <%= testcases[i].input %> > temp.txt;
+	<% for(var i=0; i < testcases.length; i++) { %>@./o.exe < <%= testcases[i].input %> > temp.txt;
 	@diff -Z -B temp.txt <%= testcases[i].output %>; \
 	RETVAL=$$?; \
 	if [ $$RETVAL -eq 0 ]; then \
@@ -13,3 +16,15 @@ run:
 		printf "${RED}Test Case <%= i+1 %> Failed${NC} \n\n"; \
 	fi
 	<% } %>
+py:
+	<% for(var i=0; i < testcases.length; i++) { %>@python Main.py  < <%= testcases[i].input %> > temp.txt;
+	@diff -Z -B temp.txt <%= testcases[i].output %>; \
+	RETVAL=$$?; \
+	if [ $$RETVAL -eq 0 ]; then \
+		printf "${Green}Test Case <%= i+1 %>  Passed${NC} \n\n"; \
+	else \
+		printf "${RED}Test Case <%= i+1 %> Failed${NC} \n\n"; \
+	fi
+	<% } %>
+noConfig:
+	@printf "${RED}Default Language Not Configured${NC} \n\n${Blue}Run : rcp init${Grey}\nTo choose your default language...";

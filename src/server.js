@@ -12,12 +12,13 @@ const fileUtils = require('./fileUtils')
 const HOME = os.userInfo().homedir,
   ROOT = path.join(HOME, 'competitivecoding'),
   TEMPLATES = path.join(HOME, '.cptemplates'),
-  FILE_EXT = '.cpp',
-  TEMPLATE_PATH = path.join(TEMPLATES, 'main') + FILE_EXT
+  FILE_EXT_CPP = '.cpp',
+  FILE_EXT_PY = '.py',
+  defaultLang = 'noConfig'
+// TEMPLATE_PATH = path.join(TEMPLATES, 'main') + FILE_EXT
 
-templateContent = fs.existsSync(TEMPLATE_PATH)
-  ? fs.readFileSync(TEMPLATE_PATH).toString()
-  : ''
+// TODO for different Languages
+templateContent = ''
 
 function commentifyMetaData(problemMetaData) {
   // problemMetaData =
@@ -97,7 +98,12 @@ const server = http.createServer((req, res) => {
     // make a source code file for the problem in cpp and copy the template
     fileUtils.write(
       problemDir,
-      problemCode + FILE_EXT,
+      'Main' + FILE_EXT_CPP,
+      problemMetaData + templateContent
+    )
+    fileUtils.write(
+      problemDir,
+      'Main' + FILE_EXT_PY,
       problemMetaData + templateContent
     )
 
@@ -108,7 +114,7 @@ const server = http.createServer((req, res) => {
       ejs.renderFile(
         path.join(__dirname, '/templates/makefile.ejs'),
         {
-          program: problemCode + FILE_EXT,
+          defaultLang,
           testcases
         },
         (err, content) => {

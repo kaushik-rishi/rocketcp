@@ -23,6 +23,12 @@ git clone https://github.com/kaushik-rishi/rocketcp.git
 cd rocketcp
 ```
 
+- Run the command to install package
+
+```sh
+npm install
+```
+
 - Run the command to start the server
 
 ```sh

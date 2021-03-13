@@ -59,7 +59,8 @@ function getProblemCode(problemName) {
 
 function getFolderName(folderName) {
   // TODO : make folder based on different cp platforms
-  return folderName.split('-').pop().trim()
+  var platform = folderName.split(' - ')
+  return platform[0].trim()
 }
 
 const server = http.createServer((req, res) => {

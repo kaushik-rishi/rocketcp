@@ -1,4 +1,4 @@
-# Contribuiton Guidelines
+# Contribution Guidelines
 
 - Please **specify your full name** on your GitHub profile for review.
 - Each participant will be assigned **2 issues (max)** at a time to work.

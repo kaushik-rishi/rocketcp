@@ -2,10 +2,13 @@
   "name": "rocket-cp",
   "version": "1.0.0",
   "description": "<p align=\"center\"><img src=\"https://media0.giphy.com/media/f6hnhHkks8bk4jwjh3/giphy.gif\" align=\"center\" width=\"200\"></p> <h1 align=\"center\">Rocket Competitive Programming</h1>",
-  "main": "src/server.js",
+  "main": "src/app.js",
+  "bin": {
+    "rcp": "./src/app.js"
+  },
   "scripts": {
     "prepare": "husky install",
-    "devStart": "nodemon src/server.js",
+    "devStart": "nodemon src/app.js",
     "start": "node src/server.js",
     "lint": "prettier --check .",
     "format": "prettier --write .",
@@ -27,6 +30,7 @@
   },
   "homepage": "https://github.com/kaushik-rishi/rocketcp#readme",
   "dependencies": {
+    "argparse": "^2.0.1",
     "ejs": "^3.1.6",
     "joi": "^17.4.0",
     "mkdirp": "^1.0.4",

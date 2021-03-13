@@ -10,7 +10,9 @@ Usage [As of development stage]:
 <img src="./assets/demo.gif">
 
 ---
-#### Here is our discord server link  - [https://discord.gg/axfEwf6K](https://discord.gg/axfEwf6K)
+
+#### Here is our discord server link - [https://discord.gg/axfEwf6K](https://discord.gg/axfEwf6K)
+
 ### Note:
 
 - I don't have much knowledge about wether the file operations should be synchronous or asynchronous.

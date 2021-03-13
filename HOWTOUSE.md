@@ -32,7 +32,7 @@ git clone https://github.com/kaushik-rishi/rocketcp.git
 cd rocketcp
 ```
 
-- Install the npm packages
+- Run the command to install package
 
 ```sh
 npm install

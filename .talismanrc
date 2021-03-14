@@ -1,4 +1,10 @@
 fileignoreconfig:
 - filename: package-lock.json
-  checksum: c0a57bce4e79aacbefe60a7a261bceb45bdd68948c58a5b0a101c63331589511
+  checksum: e7bfeebb6b4b8a4860e3fa005e62dabedd6695120f6b6dcbaaed497d3bf75eab
+  ignore_detectors: []
+- filename: HOWTOUSE.md
+  checksum: 52f8f00b64dca3a985c5fadd335df014370a12842cbdae8570c127c348a059e1
+  ignore_detectors: []
+- filename: assets/images/Issue_image.jpg
+  checksum: e02fe925f5e0ede648aeb03e93660dd4291d080ee84b20e17067a1f742d688d8
   ignore_detectors: []

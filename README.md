@@ -5,6 +5,10 @@ A command line client for parsing and making folders and files for test cases us
 
 ---
 
+## Tech Stack:
+
+<img alt="JavaScript" src="https://img.shields.io/badge/javascript%20-%23323330.svg?&style=for-the-badge&logo=javascript&logoColor=%23F7DF1E"/> <img alt="Make-File" src="https://img.shields.io/badge/makefile%20-%23107C10.svg?&style=for-the-badge&logo=makefile&logoColor=white"/> <img alt="E JS" src="https://img.shields.io/badge/E%20js%20-%23000000.svg?&style=for-the-badge&logo=E.js&logoColor=white"/> <img alt="Shell" src="https://img.shields.io/badge/shell%20-%23121011.svg?&style=for-the-badge&logo=gnu-bash&logoColor=white"/> <img alt="NodeJS" src="https://img.shields.io/badge/vanilla node.js%20-%2343853D.svg?&style=for-the-badge&logo=node.js&logoColor=white"/>
+
 Usage [As of development stage]:
 
 <img src="./assets/project videos/demo.gif">

@@ -5,30 +5,11 @@ executor.js
 
 const chalk = require('chalk')
 const fs = require('fs')
+const path = require('path')
 const shell = require('shelljs')
+const commands = require('./commands.json')
 
-const root = process.cwd()
-
-let config = null
-
-try {
-    // try to get the config file in the problem directory
-    // TODO : Validate the .config file and throw error
-
-    config = require(`${root}/.config.json`)
-} catch (err) {
-    // if there was problem getting the config file
-
-    // if the config file existed
-    if (fs.existsSync(`${root}/.config.json`)) {
-        console.log(chalk.red('RCP reserved file .config.json is corupted.'))
-    } else {
-        // if no such file exists
-        console.log(chalk.red('This is not a valid RCP problem directory.'))
-    }
-
-    process.exit(1)
-}
+const problemDir = process.cwd()
 
 // trims the block of spaces at the end of a string
 function rtrim(str) {
@@ -54,7 +35,7 @@ function match(sol, test) {
 
 // executes the program file feeding it in the test case files and matching the output against the output files
 function execute(lang) {
-    if (!config.langs[lang]) {
+    if (!commands[lang]) {
         console.log(
             `${chalk.red('This language is not added to this problem')}
  ${chalk.blue('Run : rcp --add=')}${chalk.yellow('<Your Lang>')}
@@ -62,50 +43,65 @@ function execute(lang) {
         )
     }
 
-    const exeComands = config.langs[lang]
-    let res = {}
+    let commandsData = commands[lang]
+    let compileCommand = commandsData['compile']
+    let runCommand =
+        commandsData['run'][process.platform === 'win32' ? 'win32' : 'unix']
 
-    if (exeComands.requireCompilation) {
+    if (!runCommand.isinterpreted) {
         console.log(chalk.blue('Compiling...'))
-        res = shell.exec(exeComands.compile)
+        let compilationResult = shell.exec(compileCommand)
 
-        if (res.code !== 0) {
-            console.log(chalk.red('Compilation Failed.'))
-            return
-        }
+        if (compilationResult.code !== 0)
+            return console.log(chalk.red('Compilation Failed.'))
+
+        console.log(chalk.green('Compiled Successfully.') + '\n\n')
     }
 
-    console.log(
-        chalk.green('Compiled Successfully.') +
-            '\n\n' +
-            chalk.blue('Executing...')
-    )
+    console.log(chalk.blue('Running the code against test cases ..'))
 
-    config.testCases.forEach((t, i) => {
-        i += 1
-        console.log(`Test Case ${i}: \n`)
+    let testCaseFiles = fs.readdirSync(path.join(problemDir, 'testcases'))
 
-        res = shell.exec(`./${exeComands.run} < ${t.input}`, { silent: true })
+    let inputFileRegex = new RegExp(/in([1-9])*\.txt/)
+    let outputFileRegex = new RegExp(/out([1-9])*\.txt/)
+    let inputFileIndices = []
+    // let outputFileIndices = []
 
-        if (res.code !== 0) {
-            return console.log(chalk.red('Run time error !!!\n\n') + res.stderr)
-        }
-
-        const out = fs.readFileSync(`${root}/${t.output}`).toString()
-
-        if (match(out, res.stdout))
-            console.log(chalk.green('Passed Succesfully\n'))
-        else
-            console.log(
-                chalk.red('Failed') +
-                    '\n\nExpected Output :\n' +
-                    out +
-                    '\nRecieved Output :\n' +
-                    res.stdout
-            )
-
-        delete res
+    testCaseFiles.forEach((fname) => {
+        let match = fname.match(inputFileRegex)
+        if (match) inputFileIndices.push(match[1])
     })
+
+    // testCaseFiles.forEach(fname => {
+    //     let match = fname.match(outputFileRegex)
+    //     if (match && inputFileIndices.includes(match[1])) outputFileIndices.push(match[1])
+    // })
+
+    // config.testCases.forEach((t, i) => {
+    //     i += 1
+    //     console.log(`Test Case ${i}: \n`)
+
+    //     res = shell.exec(`./${exeComands.run} < ${t.input}`, { silent: true })
+
+    //     if (res.code !== 0) {
+    //         return console.log(chalk.red('Run time error !!!\n\n') + res.stderr)
+    //     }
+
+    //     const out = fs.readFileSync(`${root}/${t.output}`).toString()
+
+    //     if (match(out, res.stdout))
+    //         console.log(chalk.green('Passed Succesfully\n'))
+    //     else
+    //         console.log(
+    //             chalk.red('Failed') +
+    //                 '\n\nExpected Output :\n' +
+    //                 out +
+    //                 '\nRecieved Output :\n' +
+    //                 res.stdout
+    //         )
+
+    //     delete res
+    // })
 }
 
 execute('cpp')

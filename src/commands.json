@@ -1,0 +1,25 @@
+{
+    "cpp": {
+        "isinterpreted": false,
+        "compile": "g++ Main.cpp -o Main.exe",
+        "run": {
+            "win32": "Main.exe",
+            "unix": "Main.exe"
+        }
+    },
+    "python": {
+        "isinterpreted": true,
+        "run": {
+            "win32": "python Main.py",
+            "unix": "python3 Main.py"
+        }
+    },
+    "java": {
+        "isinterpreted": false,
+        "compile": "javac Main.java",
+        "run": {
+            "win32": "java Main",
+            "unix": "java Main"
+        }
+    }
+}

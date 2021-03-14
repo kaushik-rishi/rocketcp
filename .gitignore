@@ -3,6 +3,7 @@
 .idea/
 
 assets_private/
+temp-test-dir/
 
 # Girlscript form registration details
 girlscript.p

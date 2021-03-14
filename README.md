@@ -32,7 +32,6 @@ Usage [As of development stage]:
     - [ ] run the program agains the test cases
     - [ ] show the difference in a user readable format (chalk for node js coloring/ bash based coloring)
     - [ ] Can we have a Makefile in a directory and then use that makefile for all the sub folders [ may be have smaller make files in each sub dir ] - Aim: memory efficient
-    
 - [ ] Config files storing user preferences
 - [ ] Ship a binary instead of running the commands using node js. Refer cftool for example (or atleast a npm package that can be installed globally)
 
@@ -119,4 +118,3 @@ Because:
 		</td>
 	</tr>
 </table>
-

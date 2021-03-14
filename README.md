@@ -7,7 +7,7 @@ A command line client for parsing and making folders and files for test cases us
 
 Usage [As of development stage]:
 
-<img src="./assets/demo.gif">
+<img src="./assets/project videos/demo.gif">
 
 ---
 
@@ -32,7 +32,6 @@ Usage [As of development stage]:
     - [ ] run the program agains the test cases
     - [ ] show the difference in a user readable format (chalk for node js coloring/ bash based coloring)
     - [ ] Can we have a Makefile in a directory and then use that makefile for all the sub folders [ may be have smaller make files in each sub dir ] - Aim: memory efficient
-- [ ]
 - [ ] Config files storing user preferences
 - [ ] Ship a binary instead of running the commands using node js. Refer cftool for example (or atleast a npm package that can be installed globally)
 
@@ -105,3 +104,17 @@ Because:
 ```
 
 - In case of any concern and queries feel free to ping us in assigned discord channels.
+
+## Contributors:
+
+### Credits goes to these people:✨
+
+<table>
+	<tr>
+		<td>
+   <a href="https://github.com/kaushik-rishi/rocketcp/graphs/contributors">
+  <img src="https://contrib.rocks/image?repo=kaushik-rishi/rocketcp" />
+</a>
+		</td>
+	</tr>
+</table>

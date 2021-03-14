@@ -1,0 +1,19 @@
+{
+  "testCases": [
+    {
+      "input": "in1.txt",
+      "output": "out1.txt"
+    },
+    {
+      "input": "in2.txt",
+      "output": "out2.txt"
+    }
+  ],
+  "langs": {
+    "cpp": {
+      "compile": "g++ main.cpp -o main.exe -std=gnu++11",
+      "requireCompilation": true,
+      "run": "main.exe"
+    }
+  }
+}

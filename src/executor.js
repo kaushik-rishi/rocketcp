@@ -6,7 +6,7 @@ executor.js
 const chalk = require('chalk')
 const fs = require('fs')
 const path = require('path')
-const shell = require('shelljs')
+const sh = require('shelljs')
 const commands = require('./commands.json')
 
 const problemDir = process.cwd()
@@ -50,58 +50,72 @@ function execute(lang) {
 
     if (!runCommand.isinterpreted) {
         console.log(chalk.blue('Compiling...'))
-        let compilationResult = shell.exec(compileCommand)
+        let compilationResult = sh.exec(compileCommand)
 
         if (compilationResult.code !== 0)
             return console.log(chalk.red('Compilation Failed.'))
 
-        console.log(chalk.green('Compiled Successfully.') + '\n\n')
+        console.log(chalk.green('Compiled Successfully.') + '\n')
     }
 
-    console.log(chalk.blue('Running the code against test cases ..'))
-
     let testCaseFiles = fs.readdirSync(path.join(problemDir, 'testcases'))
-
     let inputFileRegex = new RegExp(/in([1-9])*\.txt/)
-    let outputFileRegex = new RegExp(/out([1-9])*\.txt/)
     let inputFileIndices = []
-    // let outputFileIndices = []
 
     testCaseFiles.forEach((fname) => {
         let match = fname.match(inputFileRegex)
         if (match) inputFileIndices.push(match[1])
     })
 
-    // testCaseFiles.forEach(fname => {
-    //     let match = fname.match(outputFileRegex)
-    //     if (match && inputFileIndices.includes(match[1])) outputFileIndices.push(match[1])
-    // })
+    console.log(chalk.cyan('Running the code against test cases ..\n'))
 
-    // config.testCases.forEach((t, i) => {
-    //     i += 1
-    //     console.log(`Test Case ${i}: \n`)
+    inputFileIndices.forEach((fileIndex) => {
+        let inpFileName = `in${fileIndex}.txt`
+        let opFileName = `out${fileIndex}.txt`
+        let result = sh.exec(
+            runCommand + '<' + path.join('testcases', inpFileName),
+            { silent: true }
+        )
+        let out = result.stdout
 
-    //     res = shell.exec(`./${exeComands.run} < ${t.input}`, { silent: true })
+        if (result.code !== 0) {
+            console.log(
+                chalk.red.underline(`Runtime error on test #${fileIndex}`)
+            )
+            console.log(
+                chalk.red('Error Message') + ' : ' + result.stderr + '\n'
+            )
+        } else {
+            if (fs.existsSync(path.join('testcases', opFileName))) {
+                let expectedOut = fs
+                    .readFileSync(path.join('testcases', opFileName))
+                    .toString()
 
-    //     if (res.code !== 0) {
-    //         return console.log(chalk.red('Run time error !!!\n\n') + res.stderr)
-    //     }
+                if (match(expectedOut, out))
+                    console.log(chalk.green(`Passed Test #${fileIndex}`))
+                else
+                    console.log(
+                        chalk.red(`Failed Test ${fileIndex}`) +
+                            chalk.magentaBright('\nExpected Output :\n') +
+                            expectedOut +
+                            chalk.magentaBright('\nRecieved Output :\n') +
+                            out
+                    )
+            } else {
+                console.log(`\n` + chalk.underline(`Test ${fileIndex}`))
+                console.log(chalk.yellow('No output file found'))
+                console.log(chalk.blue('-------- INPUT --------'))
+                console.log(
+                    fs
+                        .readFileSync(path.join('testcases', inpFileName))
+                        .toString()
+                )
 
-    //     const out = fs.readFileSync(`${root}/${t.output}`).toString()
-
-    //     if (match(out, res.stdout))
-    //         console.log(chalk.green('Passed Succesfully\n'))
-    //     else
-    //         console.log(
-    //             chalk.red('Failed') +
-    //                 '\n\nExpected Output :\n' +
-    //                 out +
-    //                 '\nRecieved Output :\n' +
-    //                 res.stdout
-    //         )
-
-    //     delete res
-    // })
+                console.log(chalk.blue('-------- OUTPUT --------'))
+                console.log(out)
+            }
+        }
+    })
 }
 
-execute('cpp')
+// execute('cpp')

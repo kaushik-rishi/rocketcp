@@ -4,7 +4,7 @@
         "compile": "g++ Main.cpp -o Main.exe",
         "run": {
             "win32": "Main.exe",
-            "unix": "Main.exe"
+            "unix": "./Main.exe"
         }
     },
     "python": {

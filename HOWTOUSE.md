@@ -53,6 +53,6 @@ Take a look at existing issues at [our issue page](https://github.com/kaushik-ri
 
 -   Then click on new issue as shown in image.
 
-![NewIssue](https://github.com/GuptaTanisha/rocketcp/blob/newDocs/src/images/Issue_image.jpg)
+![NewIssue](./assets/images/Issue_image.jpg)
 
 -   Add a suitable title and describe your issue. One can add screenshots or small gifs for demonstration. And then submit it.

@@ -60,9 +60,9 @@ const execute = (lang) => {
     }
 
     console.log(
-        `${chalk.green('Compiled Successfully.')} \n\n${chalk.blue(
-            'Executing...'
-        )}`
+        chalk.green('Compiled Successfully.') +
+            '\n\n' +
+            chalk.blue('Executing...')
     )
 
     config.testCases.forEach((t, i) => {
@@ -81,11 +81,11 @@ const execute = (lang) => {
             console.log(chalk.green('Passed Succesfully\n'))
         else
             console.log(
-                `${chalk.red(
-                    'Failed'
-                )}\n\nExpected Output :\n${out}\nRecieved Output :\n${
+                chalk.red('Failed') +
+                    '\n\nExpected Output :\n' +
+                    out +
+                    '\nRecieved Output :\n' +
                     res.stdout
-                }`
             )
 
         delete res

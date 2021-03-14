@@ -2,6 +2,7 @@
 .vscode/
 .idea/
 
+temp-test-dir/
 assets_private/
 temp-test-dir/
 

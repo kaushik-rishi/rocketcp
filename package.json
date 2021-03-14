@@ -15,7 +15,8 @@
         "tabWidth": 4,
         "singleQuote": true,
         "semi": false,
-        "trailingComma": "none"
+        "trailingComma": "none",
+        "embeddedLanguageFormatting": "off"
     },
     "repository": {
         "type": "git",

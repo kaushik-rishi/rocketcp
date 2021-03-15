@@ -2,7 +2,9 @@
 .vscode/
 .idea/
 
+temp-test-dir/
 assets_private/
+temp-test-dir/
 
 # Girlscript form registration details
 girlscript.p

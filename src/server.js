@@ -11,7 +11,6 @@ const fileUtils = require('./fileUtils')
 
 const HOME = os.userInfo().homedir,
     ROOT = path.join(HOME, 'competitivecoding'),
-    TEMPLATES = path.join(HOME, '.cptemplates'),
     FILE_EXT_CPP = '.cpp',
     FILE_EXT_PY = '.py',
     defaultLang = 'noConfig'

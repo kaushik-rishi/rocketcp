@@ -4,31 +4,10 @@ const chalk = require('chalk')
 const fs = require('fs')
 const path = require('path')
 const sh = require('shelljs')
-const commands = require('./commands.json')
+const commands = require('../commands.json')
+const { match } = require('./diffChecker')
 
 const problemDir = process.cwd()
-
-// trims the block of spaces at the end of a string
-function rtrim(str) {
-    if (str == null) return str
-    return str.replace(/\s+$/g, '')
-}
-
-// returns wether the solution matches the test or not
-function match(sol, test) {
-    // TODO : use better diff algorithm or diff package to show the difference
-    if (!sol) return false
-
-    sol = sol.split('\n')
-    test = test.split('\n')
-
-    if (sol.length < test.length) return false
-
-    for (let i = 0; i < test.length; i += 1)
-        if (rtrim(sol[i]) != rtrim(test[i])) return false
-
-    return true
-}
 
 // executes the program file feeding it in the test case files and matching the output against the output files
 function execute(lang) {

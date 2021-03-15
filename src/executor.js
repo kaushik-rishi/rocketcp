@@ -1,7 +1,4 @@
-/*
-executor.js
-- Based on a .config file present in the problem directory executes the program file based on the language given the test cases
-*/
+#!/usr/bin/env node
 
 const chalk = require('chalk')
 const fs = require('fs')

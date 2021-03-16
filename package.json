@@ -13,7 +13,8 @@
         "lint": "prettier --check .",
         "format": "prettier --write .",
         "husky-talisman": "husky-talisman",
-        "test": "jest"
+        "test": "jest",
+        "staged-fmt": "git diff --name-only --cached -- '***.js' | xargs prettier --write"
     },
     "prettier": {
         "tabWidth": 4,

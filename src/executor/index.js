@@ -47,7 +47,9 @@ function execute(lang) {
         if (match) inputFileIndices.push(match[1])
     })
 
-    console.log(chalk.cyan('Running the code against test cases ..\n'))
+    console.log(
+        chalk.keyword('orange')('Running the code against test cases ..\n')
+    )
 
     inputFileIndices.forEach((fileIndex) => {
         let inpFilePath = path.join('testcases', `in${fileIndex}.txt`)
@@ -72,22 +74,28 @@ function execute(lang) {
 
                 let difference = getDifference(out, expectedOut)
                 if (difference === null)
-                    console.log(chalk.green(`Passed Test #${fileIndex}`))
+                    console.log(
+                        chalk.green.underline(`\nPassed Test #${fileIndex}\n`)
+                    )
                 else {
                     console.log(
-                        chalk.red(`------- Failed Test ${fileIndex} -------`) +
-                            chalk.magentaBright('\nInput :\n') +
+                        chalk.red.underline(`Failed Test ${fileIndex}\n`) +
+                            chalk.magentaBright.underline('\nInput\n') +
                             inputContent +
-                            chalk.magentaBright('\n\nExpected Output :\n') +
+                            chalk.magentaBright.underline(
+                                '\n\nExpected Output\n'
+                            ) +
                             rtrimFullString(expectedOut) +
-                            chalk.magentaBright('\n\nRecieved Output :\n') +
+                            chalk.magentaBright.underline(
+                                '\n\nRecieved Output\n'
+                            ) +
                             rtrimFullString(out)
                     )
-                    console.log(chalk.magentaBright('\nDifference'))
+                    console.log(chalk.yellow.underline('\nDifference'))
                     console.log(getDiffString(difference))
                 }
             } else {
-                console.log(chalk.underline(`Test Case ${fileIndex}`))
+                console.log(chalk.underline(`Test ${fileIndex}`))
                 console.log(
                     chalk.yellow('No output file found [Custom test case]')
                 )

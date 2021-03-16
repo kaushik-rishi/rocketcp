@@ -33,9 +33,11 @@ function parser(data) {
 
     let contestDir = path.join(ROOT, folderName)
     let problemDir = path.join(contestDir, problemName)
+    let problemTestsDir = path.join(problemDir, 'testcases')
 
     // returns the path from onward which the directories are made
-    mkdirp.sync(problemDir)
+    mkdirp.sync(problemTestsDir)
+
     console.log(
         `Created a directory for the problem ${problemName} => ${problemDir}`
     )
@@ -51,19 +53,15 @@ function parser(data) {
 
     // TODO : make files based on configuration file
     fileUtils.write(
-        problemDir,
+        problemTestsDir,
         'Main' + FILE_EXT_CPP,
         problemMetaData + templateContent
     )
 
     // TODO : copy the template from the configuration file
 
-    // save and get the test case files
-    const testcases = parserUtils.saveSamples(
-        problemDir,
-        sampleTests,
-        interactive
-    )
+    // save the test case files
+    parserUtils.saveSamples(problemTestsDir, sampleTests, interactive)
 }
 
 module.exports = parser

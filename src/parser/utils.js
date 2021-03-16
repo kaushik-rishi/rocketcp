@@ -6,26 +6,20 @@ function commentifyMetaData(problemMetaData) {
     return problemMetaData
 }
 
-function saveSamples(problemDir, sampleTests, isInteractive) {
+function saveSamples(problemTestsDir, sampleTests, isInteractive) {
     let interactive = isInteractive ? 'interactive-' : ''
-    const testCases = []
     sampleTests.forEach((test, index) => {
         fileUtils.createWrite(
-            problemDir,
+            problemTestsDir,
             `${interactive}in${index + 1}.txt`,
             test.input
         )
         fileUtils.createWrite(
-            problemDir,
+            problemTestsDir,
             `${interactive}out${index + 1}.txt`,
             test.output
         )
-        testCases.push({
-            input: `${interactive}in${index + 1}.txt`,
-            output: `${interactive}out${index + 1}.txt`
-        })
     })
-    return testCases
 }
 
 function getProblemCode(problemName) {

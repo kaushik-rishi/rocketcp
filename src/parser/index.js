@@ -1,6 +1,5 @@
 #!/usr/bin/env node
 
-const ejs = require('ejs')
 const fileUtils = require('../fileUtils')
 const fs = require('fs')
 const mkdirp = require('mkdirp')
@@ -9,16 +8,15 @@ const path = require('path')
 
 const parserUtils = require('./utils')
 
+// TODO : get the data from the configuration file
 const HOME = os.userInfo().homedir,
     ROOT = path.join(HOME, 'competitivecoding'),
-    FILE_EXT_CPP = '.cpp',
-    FILE_EXT_PY = '.py',
-    defaultLang = 'noConfig'
+    FILE_EXT_CPP = '.cpp'
 
-// TODO for different Languages
-templateContent = ''
+// TODO : for different Languages
+templateContent = fs.readFileSync('../templates/codes/cpp.txt')
 
-async function parser(data) {
+function parser(data) {
     let {
         name: problemName,
         group: folderName,
@@ -46,17 +44,17 @@ async function parser(data) {
     problemMetaData = parserUtils.commentifyMetaData(problemMetaData)
 
     let problemCode = parserUtils.getProblemCode(problemName)
+
     // make a source code file for the problem in cpp and copy the template
+
+    // TODO : make files based on configuration file
     fileUtils.write(
         problemDir,
         'Main' + FILE_EXT_CPP,
         problemMetaData + templateContent
     )
-    fileUtils.write(
-        problemDir,
-        'Main' + FILE_EXT_PY,
-        problemMetaData + templateContent
-    )
+
+    // TODO : copy the template from the configuration file
 
     // save and get the test case files
     const testcases = parserUtils.saveSamples(
@@ -64,22 +62,6 @@ async function parser(data) {
         sampleTests,
         interactive
     )
-    // creating content for makefile
-    const makeFileContent = await new Promise((resolve, reject) => {
-        ejs.renderFile(
-            path.join(__dirname, '../templates/makefile.ejs'),
-            {
-                defaultLang,
-                testcases
-            },
-            (err, content) => {
-                if (err) reject(err)
-                resolve(content)
-            }
-        )
-    })
-    // saving make file
-    fileUtils.write(problemDir, 'Makefile', makeFileContent)
 }
 
 module.exports = parser

@@ -10,9 +10,9 @@ const server = http.createServer((req, res) => {
     let bodyBuffer = ''
     req.on('data', (chunk) => (bodyBuffer += chunk))
 
-    req.on('end', async () => {
+    req.on('end', () => {
         const data = JSON.parse(bodyBuffer.toString())
-        await parser(data)
+        parser(data)
     })
 })
 

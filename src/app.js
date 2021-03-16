@@ -3,6 +3,7 @@
 
 const { ArgumentParser } = require('argparse')
 const { version } = require('../package.json')
+const chalk = require('chalk')
 
 const parser = new ArgumentParser({
     description:

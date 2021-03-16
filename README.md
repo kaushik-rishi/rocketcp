@@ -11,7 +11,7 @@ A command line client for parsing and making folders and files for test cases us
 
 Usage [As of development stage]:
 
-<img src="./assets/project videos/demo.gif">
+<img src="./docs_assets/project videos/demo.gif">
 
 ---
 

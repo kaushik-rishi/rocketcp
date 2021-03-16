@@ -3,7 +3,9 @@
     "version": "1.0.0",
     "description": "<p align=\"center\"><img src=\"https://media0.giphy.com/media/f6hnhHkks8bk4jwjh3/giphy.gif\" align=\"center\" width=\"200\"></p> <h1 align=\"center\">Rocket Competitive Programming</h1>",
     "main": "src/server.js",
-    "preferGlobal": true,
+    "bin": {
+        "rkt": "./src/app.js"
+    },
     "scripts": {
         "prepare": "husky install",
         "devStart": "nodemon src/server.js",
@@ -30,6 +32,7 @@
     },
     "homepage": "https://github.com/kaushik-rishi/rocketcp#readme",
     "dependencies": {
+        "argparse": "^2.0.1",
         "ejs": "^3.1.6",
         "fast-diff": "^1.2.0",
         "mkdirp": "^1.0.4",

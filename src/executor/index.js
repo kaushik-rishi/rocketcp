@@ -5,7 +5,11 @@ const fs = require('fs')
 const path = require('path')
 const sh = require('shelljs')
 const commands = require('../commands.json')
-const { match } = require('./diffChecker')
+const {
+    getDiffString,
+    getDifference,
+    rtrimFullString
+} = require('./diffChecker')
 
 const problemDir = process.cwd()
 
@@ -46,12 +50,13 @@ function execute(lang) {
     console.log(chalk.cyan('Running the code against test cases ..\n'))
 
     inputFileIndices.forEach((fileIndex) => {
-        let inpFileName = `in${fileIndex}.txt`
-        let opFileName = `out${fileIndex}.txt`
-        let result = sh.exec(
-            runCommand + '<' + path.join('testcases', inpFileName),
-            { silent: true }
+        let inpFilePath = path.join('testcases', `in${fileIndex}.txt`)
+        let opFilePath = path.join('testcases', `out${fileIndex}.txt`)
+        let inputContent = rtrimFullString(
+            fs.readFileSync(inpFilePath).toString()
         )
+
+        let result = sh.exec(runCommand + '<' + inpFilePath, { silent: true })
         let out = result.stdout
 
         if (result.code !== 0) {
@@ -62,36 +67,40 @@ function execute(lang) {
                 chalk.red('Error Message') + ' : ' + result.stderr + '\n'
             )
         } else {
-            if (fs.existsSync(path.join('testcases', opFileName))) {
-                let expectedOut = fs
-                    .readFileSync(path.join('testcases', opFileName))
-                    .toString()
+            if (fs.existsSync(opFilePath)) {
+                let expectedOut = fs.readFileSync(opFilePath).toString()
 
-                if (match(expectedOut, out))
+                let difference = getDifference(out, expectedOut)
+                if (difference === null)
                     console.log(chalk.green(`Passed Test #${fileIndex}`))
-                else
+                else {
                     console.log(
-                        chalk.red(`Failed Test ${fileIndex}`) +
-                            chalk.magentaBright('\nExpected Output :\n') +
-                            expectedOut +
-                            chalk.magentaBright('\nRecieved Output :\n') +
-                            out
+                        chalk.red(`------- Failed Test ${fileIndex} -------`) +
+                            chalk.magentaBright('\nInput :\n') +
+                            inputContent +
+                            chalk.magentaBright('\n\nExpected Output :\n') +
+                            rtrimFullString(expectedOut) +
+                            chalk.magentaBright('\n\nRecieved Output :\n') +
+                            rtrimFullString(out)
                     )
+                    console.log(chalk.magentaBright('\nDifference'))
+                    console.log(getDiffString(difference))
+                }
             } else {
-                console.log(`\n` + chalk.underline(`Test ${fileIndex}`))
-                console.log(chalk.yellow('No output file found'))
-                console.log(chalk.blue('-------- INPUT --------'))
+                console.log(chalk.underline(`Test Case ${fileIndex}`))
                 console.log(
-                    fs
-                        .readFileSync(path.join('testcases', inpFileName))
-                        .toString()
+                    chalk.yellow('No output file found [Custom test case]')
                 )
+                console.log(chalk.magentaBright.underline('\nInput'))
+                console.log(inputContent)
 
-                console.log(chalk.blue('-------- OUTPUT --------'))
-                console.log(out)
+                console.log(chalk.magentaBright.underline('\nOutput'))
+                console.log(rtrimFullString(out))
             }
         }
     })
 }
 
-// execute('cpp')
+execute('cpp')
+
+module.exports = execute

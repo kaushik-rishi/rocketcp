@@ -15,7 +15,7 @@ Usage [As of development stage]:
 
 ---
 
-#### Here is our discord server link - [https://discord.gg/axfEwf6K](https://discord.gg/axfEwf6K)
+#### Here is our discord server link - [https://discord.gg/wzjyjyACuR](https://discord.gg/wzjyjyACuR)
 
 ### Note:
 

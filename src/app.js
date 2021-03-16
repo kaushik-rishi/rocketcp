@@ -14,13 +14,13 @@ parser.add_argument('-v', '--version', { action: 'version', version })
 parser.add_argument('mode', {
     help: 'Allows the user to setup RCP properly',
     type: String,
-    choices: ['init', 'server'],
+    choices: ['listen', 'server'],
     nargs: '?',
     default: 'server'
 })
 
 let args = parser.parse_args()
-if (args.mode === 'server') {
+if (args.mode === 'listen') {
     require('./server')
 }
 if (args.mode === 'init') {

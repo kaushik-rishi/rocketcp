@@ -14,7 +14,9 @@ const HOME = os.userInfo().homedir,
     FILE_EXT_CPP = '.cpp'
 
 // TODO : for different Languages
-templateContent = fs.readFileSync('../templates/codes/cpp.txt')
+templateContent = fs
+    .readFileSync(path.join(__dirname, '..', 'templates', 'codes', 'cpp.txt'))
+    .toString()
 
 function parser(data) {
     let {

@@ -1,5 +1,3 @@
-#!/usr/bin/env node
-
 const chalk = require('chalk')
 const fs = require('fs')
 const path = require('path')
@@ -99,7 +97,7 @@ function execute(lang) {
                             out
                     )
             } else {
-                console.log(`\n` + chalk.underline(`Test ${fileIndex}`))
+                console.log('\n' + chalk.underline(`Test ${fileIndex}`))
                 console.log(chalk.yellow('No output file found'))
                 console.log(chalk.blue('-------- INPUT --------'))
                 console.log(
@@ -114,5 +112,5 @@ function execute(lang) {
         }
     })
 }
-
+module.exports = execute
 // execute('cpp')

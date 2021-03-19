@@ -1,10 +1,8 @@
-#!/usr/bin/env node
-
 const http = require('http')
 const os = require('os')
 const path = require('path')
 const mkdirp = require('mkdirp')
-const fs = require('fs')
+// const fs = require('fs');
 const ejs = require('ejs')
 const ora = require('ora')
 
@@ -12,14 +10,14 @@ const fileUtils = require('./fileUtils')
 
 const HOME = os.userInfo().homedir,
     ROOT = path.join(HOME, 'competitivecoding'),
-    TEMPLATES = path.join(HOME, '.cptemplates'),
+    // TEMPLATES = path.join(HOME, '.cptemplates'),
     FILE_EXT_CPP = '.cpp',
     FILE_EXT_PY = '.py',
     defaultLang = 'noConfig'
 // TEMPLATE_PATH = path.join(TEMPLATES, 'main') + FILE_EXT
 
 // TODO for different Languages
-templateContent = ''
+// templateContent = '';
 
 function commentifyMetaData(problemMetaData) {
     // problemMetaData =
@@ -53,10 +51,10 @@ function saveSamples(problemDir, sampleTests, isInteractive) {
     return testCases
 }
 
-function getProblemCode(problemName) {
-    // TODO : return the problem code based on different cp platforms
-    return problemName.split(' ')[0][0].trim()
-}
+// function getProblemCode(problemName) {
+//     // TODO : return the problem code based on different cp platforms
+//     return problemName.split(' ')[0][0].trim();
+// }
 
 function getFolderName(folderName) {
     // TODO : make folder based on different cp platforms
@@ -66,7 +64,7 @@ function getFolderName(folderName) {
 
 const server = http.createServer((req, res) => {
     let bodyBuffer = ''
-    const spinner = ora(`Incoming problem`).start()
+    const spinner = ora('Incoming problem').start()
     req.on('data', (chunk) => (bodyBuffer += chunk))
 
     req.on('end', async () => {
@@ -91,23 +89,15 @@ const server = http.createServer((req, res) => {
             // returns the path from onward which the directories are made
             mkdirp.sync(problemDir)
 
-            problemMetaData = `Name of problem: ${problemName}\nContest: ${folderName}\nLink to problem: ${problemUrl}\nTime Limit: ${
+            let problemMetaData = `Name of problem: ${problemName}\nContest: ${folderName}\nLink to problem: ${problemUrl}\nTime Limit: ${
                 timeLimit / 1000
             } second(s)\nMemory Limit: ${memoryLimit} mb`
             problemMetaData = commentifyMetaData(problemMetaData)
 
-            let problemCode = getProblemCode(problemName)
+            // let problemCode = getProblemCode(problemName);
             // make a source code file for the problem in cpp and copy the template
-            fileUtils.write(
-                problemDir,
-                'Main' + FILE_EXT_CPP,
-                problemMetaData + templateContent
-            )
-            fileUtils.write(
-                problemDir,
-                'Main' + FILE_EXT_PY,
-                problemMetaData + templateContent
-            )
+            fileUtils.write(problemDir, 'Main' + FILE_EXT_CPP, problemMetaData)
+            fileUtils.write(problemDir, 'Main' + FILE_EXT_PY, problemMetaData)
 
             // save and get the test case files
             const testcases = saveSamples(problemDir, sampleTests, interactive)
@@ -131,6 +121,7 @@ const server = http.createServer((req, res) => {
         } catch (e) {
             spinner.fail(`${String(e)} for ${problemName}`)
         }
+        res.end()
     })
 })
 

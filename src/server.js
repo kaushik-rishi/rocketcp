@@ -6,6 +6,7 @@ const path = require('path')
 const mkdirp = require('mkdirp')
 const fs = require('fs')
 const ejs = require('ejs')
+const ora = require('ora')
 
 const fileUtils = require('./fileUtils')
 
@@ -65,6 +66,7 @@ function getFolderName(folderName) {
 
 const server = http.createServer((req, res) => {
     let bodyBuffer = ''
+    const spinner = ora(`Incoming problem`).start()
     req.on('data', (chunk) => (bodyBuffer += chunk))
 
     req.on('end', async () => {
@@ -79,53 +81,56 @@ const server = http.createServer((req, res) => {
             memoryLimit: memoryLimit
         } = data
 
-        folderName = getFolderName(folderName)
+        try {
+            spinner.text = `Making files for ${problemName}`
+            folderName = getFolderName(folderName)
 
-        let contestDir = path.join(ROOT, folderName)
-        let problemDir = path.join(contestDir, problemName)
+            let contestDir = path.join(ROOT, folderName)
+            let problemDir = path.join(contestDir, problemName)
 
-        // returns the path from onward which the directories are made
-        mkdirp.sync(problemDir)
-        console.log(
-            `Created a directory for the problem ${problemName} => ${problemDir}`
-        )
+            // returns the path from onward which the directories are made
+            mkdirp.sync(problemDir)
 
-        problemMetaData = `Name of problem: ${problemName}\nContest: ${folderName}\nLink to problem: ${problemUrl}\nTime Limit: ${
-            timeLimit / 1000
-        } second(s)\nMemory Limit: ${memoryLimit} mb`
-        problemMetaData = commentifyMetaData(problemMetaData)
+            problemMetaData = `Name of problem: ${problemName}\nContest: ${folderName}\nLink to problem: ${problemUrl}\nTime Limit: ${
+                timeLimit / 1000
+            } second(s)\nMemory Limit: ${memoryLimit} mb`
+            problemMetaData = commentifyMetaData(problemMetaData)
 
-        let problemCode = getProblemCode(problemName)
-        // make a source code file for the problem in cpp and copy the template
-        fileUtils.write(
-            problemDir,
-            'Main' + FILE_EXT_CPP,
-            problemMetaData + templateContent
-        )
-        fileUtils.write(
-            problemDir,
-            'Main' + FILE_EXT_PY,
-            problemMetaData + templateContent
-        )
-
-        // save and get the test case files
-        const testcases = saveSamples(problemDir, sampleTests, interactive)
-        // creating content for makefile
-        const makeFileContent = await new Promise((resolve, reject) => {
-            ejs.renderFile(
-                path.join(__dirname, '/templates/makefile.ejs'),
-                {
-                    defaultLang,
-                    testcases
-                },
-                (err, content) => {
-                    if (err) reject(err)
-                    resolve(content)
-                }
+            let problemCode = getProblemCode(problemName)
+            // make a source code file for the problem in cpp and copy the template
+            fileUtils.write(
+                problemDir,
+                'Main' + FILE_EXT_CPP,
+                problemMetaData + templateContent
             )
-        })
-        // saving make file
-        fileUtils.write(problemDir, 'Makefile', makeFileContent)
+            fileUtils.write(
+                problemDir,
+                'Main' + FILE_EXT_PY,
+                problemMetaData + templateContent
+            )
+
+            // save and get the test case files
+            const testcases = saveSamples(problemDir, sampleTests, interactive)
+            // creating content for makefile
+            const makeFileContent = await new Promise((resolve, reject) => {
+                ejs.renderFile(
+                    path.join(__dirname, '/templates/makefile.ejs'),
+                    {
+                        defaultLang,
+                        testcases
+                    },
+                    (err, content) => {
+                        if (err) reject(err)
+                        resolve(content)
+                    }
+                )
+            })
+            // saving make file
+            fileUtils.write(problemDir, 'Makefile', makeFileContent)
+            spinner.succeed(`Successfully created files for ${problemName}`)
+        } catch (e) {
+            spinner.fail(`${String(e)} for ${problemName}`)
+        }
     })
 })
 

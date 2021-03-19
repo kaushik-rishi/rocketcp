@@ -8,15 +8,18 @@
         "devStart": "nodemon src/app.js",
         "start": "node src/app.js",
         "lint": "prettier --check .",
-        "format": "prettier --write .",
+        "format": "./node_modules/.bin/eslint . --fix",
         "husky-talisman": "husky-talisman",
         "test": "jest"
     },
     "prettier": {
         "tabWidth": 4,
         "singleQuote": true,
-        "semi": false,
-        "trailingComma": "none"
+        "semi": true,
+        "trailingComma": "none",
+        "bracketSpacing": true,
+        "jsxBracketSameLine": true,
+        "parser": "flow"
     },
     "repository": {
         "type": "git",

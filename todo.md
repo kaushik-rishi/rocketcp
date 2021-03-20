@@ -1,0 +1,2 @@
+-   split the command and the file name in the commands.json for more flexibility on the users end
+-   file watcher and exeucter

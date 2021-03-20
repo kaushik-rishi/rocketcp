@@ -1,13 +1,15 @@
 #!/usr/bin/env node
 'use strict'
 
+// Code for the CLI App
+
 const { ArgumentParser } = require('argparse')
 const { version } = require('../package.json')
 const chalk = require('chalk')
 
 const parser = new ArgumentParser({
     description:
-        'A command line client for parsing and making folders and files for test cases using the competitive companion extension and testing the solution. Building this with an aim of making Competitive Programming More Productive'
+        'A command line client for parsing the test cases using the competitive companion extension and testing the users solution. 🎯'
 })
 
 parser.add_argument('-v', '--version', { action: 'version', version })

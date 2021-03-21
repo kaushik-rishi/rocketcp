@@ -5,8 +5,11 @@ const mkdirp = require('mkdirp');
 // const fs = require('fs');
 const ejs = require('ejs');
 const ora = require('ora');
+const fp = require('find-free-port');
+const chalk = require('chalk');
 
 const fileUtils = require('./fileUtils');
+const ports = [1327, 4244, 6174, 10042, 10043, 10045, 27121];
 
 const HOME = os.userInfo().homedir,
     ROOT = path.join(HOME, 'competitivecoding'),
@@ -124,10 +127,28 @@ const server = http.createServer((req, res) => {
         res.end();
     });
 });
-
-const PORT_POST = 10045;
-server.listen(PORT_POST, () =>
-    console.log(
-        `Listening for Parsed problem POST requests on Port ${PORT_POST}`
+Promise.all(
+    ports.map((p) =>
+        fp(p, p + 1)
+            .then(([freeP]) => freeP)
+            .catch(() => false)
     )
-);
+).then((freePorts) => {
+    freePorts = freePorts.filter(Boolean);
+    if (freePorts.length > 0) {
+        const PORT_POST = freePorts[0];
+        server.listen(PORT_POST, () =>
+            console.log(
+                `Listening for Parsed problem POST requests on Port ${PORT_POST}`
+            )
+        );
+    } else {
+        console.log(chalk.red('No Free Ports found.'));
+        console.log(
+            '\n\nPlease Free any one of the bellow mentioned ports in your PC :\n'
+        );
+        ports.map((port) => {
+            console.log(`\n${chalk.blue('==>')} ${port}`);
+        });
+    }
+});

@@ -12,7 +12,7 @@
     "rules": {
         "node/shebang": "error",
         "indent": ["error", 4],
-        "linebreak-style": ["error", "unix"],
+        "linebreak-style": ["error", "windows"],
         "quotes": ["error", "single"],
         "semi": ["error", "always"],
         "no-use-before-define": 0,
@@ -46,7 +46,8 @@
                 "bracketSpacing": true,
                 "jsxBracketSameLine": true,
                 "parser": "flow",
-                "semi": true
+                "semi": true,
+                "endOfLine":"crlf"
             }
         ]
     }

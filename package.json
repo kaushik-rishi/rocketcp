@@ -34,6 +34,7 @@
     "dependencies": {
         "argparse": "^2.0.1",
         "ejs": "^3.1.6",
+        "find-free-port": "^2.0.0",
         "mkdirp": "^1.0.4",
         "ora": "^5.4.0",
         "shelljs": "^0.8.4"

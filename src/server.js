@@ -5,8 +5,9 @@ const mkdirp = require('mkdirp');
 // const fs = require('fs');
 const ejs = require('ejs');
 const ora = require('ora');
+const freePorts = require('./helpers/freePorts');
 
-const fileUtils = require('./fileUtils');
+const fileUtils = require('./helpers/fileUtils');
 
 const HOME = os.userInfo().homedir,
     ROOT = path.join(HOME, 'competitivecoding'),
@@ -124,10 +125,12 @@ const server = http.createServer((req, res) => {
         res.end();
     });
 });
-
-const PORT_POST = 10045;
-server.listen(PORT_POST, () =>
-    console.log(
-        `Listening for Parsed problem POST requests on Port ${PORT_POST}`
-    )
-);
+freePorts
+    .getPort()
+    .then((PORT_POST) =>
+        server.listen(PORT_POST, () =>
+            console.log(
+                `Listening for Parsed problem POST requests on Port ${PORT_POST}`
+            )
+        )
+    );

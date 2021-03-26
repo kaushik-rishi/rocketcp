@@ -1,6 +1,7 @@
 const http = require('http')
 const parser = require('./parser')
 const ora = require('ora')
+const freePorts = require('./serverUtils/freePorts')
 
 let spinner
 
@@ -18,8 +19,9 @@ const server = http.createServer((req, res) => {
     })
 })
 
-const PORT_POST = 10045
-server.listen(PORT_POST, () => {
-    console.log(`🚀 RKTCP up on port ${PORT_POST}`)
-    spinner = ora('Incoming Problem').start()
+freePorts.getPort().then((PORT_POST) => {
+    server.listen(PORT_POST, () => {
+        console.log(`🚀 RKTCP up on port ${PORT_POST}`)
+        spinner = ora('Incoming Problem').start()
+    })
 })

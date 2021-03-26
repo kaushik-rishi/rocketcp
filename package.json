@@ -34,9 +34,12 @@
     "homepage": "https://github.com/kaushik-rishi/rocketcp#readme",
     "dependencies": {
         "argparse": "^2.0.1",
+        "chalk": "^2.4.2",
         "ejs": "^3.1.6",
         "fast-diff": "^1.2.0",
+        "find-free-port": "^2.0.0",
         "mkdirp": "^1.0.4",
+        "ora": "^5.4.0",
         "shelljs": "^0.8.4",
         "yargs": "^15.4.1"
     },

@@ -1,5 +1,3 @@
-#!/usr/bin/env node
-
 const fs = require('fs')
 const path = require('path')
 
@@ -8,7 +6,7 @@ function createWrite(directory, fileName, contents) {
         return new Error(`The path ${directory} does not exist`)
     }
 
-    console.log(`Creating the file ${path.join(directory, fileName)}`)
+    // console.log(`Creating the file ${path.join(directory, fileName)}`)
     fs.writeFileSync(path.join(directory, fileName), contents)
 }
 

@@ -49,7 +49,7 @@ function parser(data, spinner) {
 
         // TODO : make files based on configuration file
         fileUtils.write(
-            problemTestsDir,
+            problemDir,
             'Main' + FILE_EXT_CPP,
             problemMetaData + templateContent
         );

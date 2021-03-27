@@ -55,8 +55,6 @@ function test() {
 
 // test()
 
-module.exports = {
-    getDifference,
-    getDiffString,
-    rtrimFullString
-};
+module.exports = function(output, expectedOut) {
+    return getDiffString(getDifference(output, expectedOut))
+}

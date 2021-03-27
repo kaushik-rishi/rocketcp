@@ -46,8 +46,7 @@
                 "bracketSpacing": true,
                 "jsxBracketSameLine": true,
                 "parser": "flow",
-                "semi": true,
-                "endOfLine":"crlf"
+                "semi": true
             }
         ]
     }

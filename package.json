@@ -2,7 +2,10 @@
     "name": "rocket-cp",
     "version": "1.0.0",
     "description": "<p align=\"center\"><img src=\"https://media0.giphy.com/media/f6hnhHkks8bk4jwjh3/giphy.gif\" align=\"center\" width=\"200\"></p> <h1 align=\"center\">Rocket Competitive Programming</h1>",
-    "main": "src/app.js",
+    "main": "src/server.js",
+    "bin": {
+        "rkt": "./src/app.js"
+    },
     "scripts": {
         "prepare": "husky install",
         "devStart": "nodemon src/app.js",
@@ -10,7 +13,8 @@
         "lint": "prettier --check .",
         "format": "./node_modules/.bin/eslint . --fix",
         "husky-talisman": "husky-talisman",
-        "test": "jest"
+        "test": "jest",
+        "staged-fmt": "git diff --name-only --cached -- '***.js' | xargs prettier --write"
     },
     "prettier": {
         "tabWidth": 4,
@@ -33,11 +37,14 @@
     "homepage": "https://github.com/kaushik-rishi/rocketcp#readme",
     "dependencies": {
         "argparse": "^2.0.1",
+        "chalk": "^2.4.2",
         "ejs": "^3.1.6",
+        "fast-diff": "^1.2.0",
         "find-free-port": "^2.0.0",
         "mkdirp": "^1.0.4",
         "ora": "^5.4.0",
-        "shelljs": "^0.8.4"
+        "shelljs": "^0.8.4",
+        "yargs": "^15.4.1"
     },
     "devDependencies": {
         "eslint": "^7.22.0",

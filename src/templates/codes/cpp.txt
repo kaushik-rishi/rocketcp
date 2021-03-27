@@ -1,18 +1,15 @@
-#include<bits/stdc++.h>
-
+#include <bits/stdc++.h>
 using namespace std;
 
-void solve(){
+void solve() {
     // Your Code Here
-    cout<<"done";
+    return;
 }
 
-int main(){
-    long long int t;
-    cin>>t;
-    while (t--)
-    {
+int main() {
+    int t;
+    cin >> t;
+    while (t--) {
         solve();
     }
-    
 }

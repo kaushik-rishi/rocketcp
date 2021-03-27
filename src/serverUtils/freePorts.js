@@ -7,13 +7,12 @@ module.exports.getPort = () =>
     Promise.all(
         ports.map((p) =>
             fp(p, p + 1)
-                .then(([freePort]) => true)
+                .then(([freePort]) => freePort)
                 .catch((err) => false)
         )
     )
         .then((freePorts) => freePorts.filter(Boolean))
         .then((freePorts) => {
-            console.log(freePorts)
             if (freePorts.length === 0) throw new Error('No Free Ports found.')
             return freePorts[0]
         })

@@ -19,9 +19,11 @@ const server = http.createServer((req, res) => {
     })
 })
 
-freePorts.getPort().then((PORT_POST) => {
-    server.listen(PORT_POST, () => {
-        console.log(`🚀 RKTCP up on port ${PORT_POST}`)
-        spinner = ora('Incoming Problem').start()
+freePorts
+    .getPort()
+    .then(PORT_POST => {
+        server.listen(PORT_POST, () => {
+            console.log(`🚀 RKTCP up on port ${PORT_POST}`)
+            spinner = ora('Incoming Problem').start()
+        })
     })
-})

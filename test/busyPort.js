@@ -1,14 +1,13 @@
-const portToBusy = +process.argv[2]
+const http = require('http')
+const ports = process.argv.slice(2).filter(portNumber => !isNaN(portNumber))
 
-if (portToBusy === NaN) {
-    console.log('port must be an integer')
-    process.exit(1)
-}
+const servers = []
+for (let i = 0; i < ports.length; ++i)
+    servers.push(http.createServer())
 
-const server = require('http').createServer()
+const alreadyBusy = []
 
-server.listen(
-    portToBusy,
-    console.log(`Trying to keep the port ${portToBusy} busy...`)
-)
-server.on('error', (err) => console.log('😒 The port is already busy'))
+ports.forEach((portNumber, index) => {
+    servers[index].listen(portNumber, console.log(`Keeping port ${portNumber} busy\n`))
+    servers[index].on('error', (err) => console.log(`Port ${portNumber} is already busy\n`))
+})

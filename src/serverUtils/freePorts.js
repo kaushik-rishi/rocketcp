@@ -19,7 +19,7 @@ module.exports.getPort = () =>
         .catch((err) => {
             console.log(chalk.red(err))
             console.log(
-                '\n\nPlease Free any one of the bellow mentioned ports in your PC :\n'
+                chalk.yellow.underline('\nPlease Free any one of the bellow mentioned ports in your PC :\n')
             )
-            ports.map((port) => console.log(`\n${chalk.blue('==>')} ${port}`))
+            ports.map((port) => console.log(`${chalk.blue('==>')} ${port}`))
         })

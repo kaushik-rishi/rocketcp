@@ -12,7 +12,6 @@
     "rules": {
         "node/shebang": "error",
         "indent": ["error", 4],
-        "linebreak-style": ["error", "windows"],
         "quotes": ["error", "single"],
         "semi": ["error", "always"],
         "no-use-before-define": 0,

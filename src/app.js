@@ -1,15 +1,15 @@
+#!/usr/bin/env node
 'use strict';
 
 // Code for the CLI App
 
-const { ArgumentParser } = require('argparse')
-const { version } = require('../package.json')
-const chalk = require('chalk')
+const { ArgumentParser } = require('argparse');
+const { version } = require('../package.json');
 
 const parser = new ArgumentParser({
     description:
         'A command line client for parsing the test cases using the competitive companion extension and testing the users solution. 🎯'
-})
+});
 
 parser.add_argument('-v', '--version', { action: 'version', version });
 parser.add_argument('mode', {
@@ -20,9 +20,9 @@ parser.add_argument('mode', {
     default: 'server'
 });
 
-let args = parser.parse_args()
+let args = parser.parse_args();
 if (args.mode === 'listen') {
-    require('./server')
+    require('./server');
 }
 
 if (args.mode === 'init') {
@@ -30,5 +30,5 @@ if (args.mode === 'init') {
 }
 
 if (args.mode === 'test') {
-    require('./executor')
+    require('./executor');
 }

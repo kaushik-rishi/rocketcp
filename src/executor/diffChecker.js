@@ -20,7 +20,8 @@ function getDiffString(difference) {
     difference.forEach((diffElement) => {
         if (diffElement[0] == 0) diffString += diffElement[1];
         else if (diffElement[0] == 1) diffString += chalk.green(diffElement[1]);
-        else if (diffElement[0] == -1) diffString += chalk.red(diffElement[1]);
+        else if (diffElement[0] == -1)
+            diffString += chalk.red.strikethrough(diffElement[1]);
     });
     return diffString;
 }
@@ -55,6 +56,11 @@ function test() {
 
 // test()
 
-module.exports = function(output, expectedOut) {
+function fastDiff(output, expectedOut) {
     return getDiffString(getDifference(output, expectedOut))
+}
+
+module.exports = {
+    fastDiff,
+    rtrimFullString    
 }

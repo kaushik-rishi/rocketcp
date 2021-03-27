@@ -7,20 +7,30 @@ A command line client for parsing and making folders and files for test cases us
 
 ## Tech Stack:
 
-<img alt="JavaScript" src="https://img.shields.io/badge/javascript%20-%23323330.svg?&style=for-the-badge&logo=javascript&logoColor=%23F7DF1E"/> <img alt="Make-File" src="https://img.shields.io/badge/makefile%20-%23107C10.svg?&style=for-the-badge&logo=makefile&logoColor=white"/> <img alt="E JS" src="https://img.shields.io/badge/E%20js%20-%23000000.svg?&style=for-the-badge&logo=E.js&logoColor=white"/> <img alt="Shell" src="https://img.shields.io/badge/shell%20-%23121011.svg?&style=for-the-badge&logo=gnu-bash&logoColor=white"/> <img alt="NodeJS" src="https://img.shields.io/badge/vanilla node.js%20-%2343853D.svg?&style=for-the-badge&logo=node.js&logoColor=white"/>
+-   In the current version
 
-Usage [As of development stage]:
+<img alt="NodeJS" src="https://img.shields.io/badge/vanilla node.js%20-%2343853D.svg?&style=for-the-badge&logo=node.js&logoColor=white"/>
+<img alt="JavaScript" src="https://img.shields.io/badge/javascript%20-%23323330.svg?&style=for-the-badge&logo=javascript&logoColor=%23F7DF1E"/>
+
+-   Used for the previous releases
+
+<img alt="Make-File" src="https://img.shields.io/badge/makefile%20-%23107C10.svg?&style=for-the-badge&logo=makefile&logoColor=white"/> 
+<img alt="E JS" src="https://img.shields.io/badge/E%20js%20-%23000000.svg?&style=for-the-badge&logo=E.js&logoColor=white"/> 
+<img alt="Shell" src="https://img.shields.io/badge/shell%20-%23121011.svg?&style=for-the-badge&logo=gnu-bash&logoColor=white"/>
+
+## Usage
 
 <img src="./assets/project videos/demo.gif">
 
 ---
 
-#### Here is our discord server link - [https://discord.gg/wzjyjyACuR](https://discord.gg/wzjyjyACuR)
+### Here is our discord server link - [https://discord.gg/axfEwf6K](https://discord.gg/axfEwf6K)
 
-### Note:
+#### Join the discord server if you:
 
--   I don't have much knowledge about wether the file operations should be synchronous or asynchronous.
--   I'm trying to keep most of the (infact all of the) functions as synchronous.
+-   have queries related to the developement of the project
+-   want to contribute to the project
+-   need help in getting the tool up and running
 
 ### Checklist:
 
@@ -31,23 +41,24 @@ Usage [As of development stage]:
     -   Template Checklist:
         -   [x] add the problem metadata on the top of the problem file
         -   [x] add only the metadata if template not found
--   [ ] Create make file for each folder
+-   [x] Create make file for each folder
     -   Makefile Checklist:
-        -   [ ] run the program agains the test cases
-        -   [ ] show the difference in a user readable format (chalk for node js coloring/ bash based coloring)
-        -   [ ] Can we have a Makefile in a directory and then use that makefile for all the sub folders [ may be have smaller make files in each sub dir ] - Aim: memory efficient
+        -   [x] run the program agains the test cases
+        -   [x] show the difference in a user readable format (chalk for node js coloring/ bash based coloring)
+        -   [x] Can we have a Makefile in a directory and then use that makefile for all the sub folders [ may be have smaller make files in each sub dir ] - Aim: memory efficient
 -   [ ] Config files storing user preferences
 -   [ ] Ship a binary instead of running the commands using node js. Refer cftool for example (or atleast a npm package that can be installed globally)
 
 Things to figure out (way above my head as of now):
 
--   [ ] Running the js script from inside the problem directory
-    -   [ ] May be use a hash bang `#/usr/bin/env node` and link the file to `bin` using `ln`
--   [ ] Making a npm package that can be installed globally ??
+-   [x] Running the js script from inside the problem directory
+    -   [x] May be use a hash bang `#/usr/bin/env node` and link the file to `bin` using `ln`
+-   [x] Making a npm package that can be installed globally ??
 -   [ ] Make an extension like `competitive companion` for codechef and codeforces
 -   [ ] Submit the problem to cf from the cli.
     -   Network checklist:
         -   [ ] Check and understand the csrf token stuff
+            -   Figured out doing this using python `request.sessions`
         -   [ ] Deep dive into the network tab
 -   [ ] If it is that the extension is developed incorporate usage of advanced DOM manipulations and web scraping and parsing and extend the extension to many other sites
 
@@ -55,63 +66,51 @@ Things to figure out (way above my head as of now):
 
 ### Dependencies:
 
--   [ ] Aim to use the least dependencies and Especially not use a web framework and build the application using vanilla node js
--   [ ] **mkdirp** - Will rewrite after studying more about path library and seperators and POSIX and NON POSIX URL Like paths
--   [ ] Prefer having less dependencies to having less SLOC
+        Aim to use the least dependencies and Especially not use a web framework and build the application using vanilla node js
 
-### Recall:
+-   **argparse** - parse the options provided to the CLI tool
+-   **mkdirp** - Will rewrite after studying more about path library and seperators and POSIX and NON POSIX URL Like paths
+-   **shelljs** - For the executor script
+-   **ejs** - For creating make files based on the file name
+-   **fast-diff** - Providing interactive difference
+-   **find-free-port** - Checks if a current port is free or not
 
--   Donot involve complexities like using env variables at the start
--   Think of cross platformeness later
+**Styling Dependencies**
+
+-   **chalk** - For colored terminal printing as this is a CLI tool.
+-   **ora** - For spinner
+
+**Developement Dependencies**
+
+-   **husky** - for git precommit hooks
+-   **husky-talisman** - for security purposes
+-   **prettier** - used to format the code in the pre commit hook
+-   **jest** - for writing unit tests
+-   **nodemon** - running the server while developement
+
+### Small note to contributors:
+
+-   Donot involve complexities like using `environment variables` at the start
+-   Think of cross platformness later
 -   Make a working version and then focus on refactoring and abstraction
 
 ### Technical details used:
 
--   PORT for listening to post requests from the extension: 10045
--   `shebang`: `#!/usr/bin/env node`
+-   PORT for listening to post requests from the extension: ~~10045~~ We have a list of possible ports and the application check's which port is free and chooses the port accordingly
 
-### For GSSOC'21 Participants
+## For Developers and Open source contributor's
 
 -   [Watch Project Introduction Video](https://youtu.be/3hCQKaUxKRQ)
 -   Please first go through our [Code Of Conduct](https://github.com/kaushik-rishi/rocketcp/blob/develop/CODE_OF_CONDUCT.md) and [Contribution Guidelines](https://github.com/kaushik-rishi/rocketcp/blob/develop/CONTRIBUTING.md)
 
-### Code Formatting
-
--   single quotes
--   tab width: 4
-
 ---
 
-### Please use following template for PR:
-
-<Issue title> #Issue id
-For example - Embed a Makefile into each problem folder #10
-
--   Please use following commit message template during working on assigned issue:
-
-```
-[Issue#Issueid]Summarize the change in less than 50 characters
-
-Because:
-- Explain the reasons you made this change
-- Make a new bullet for each reason
-- Each line should be under 72 characters
-```
-
-For example:
-
-```
-[Issue#10] Added Make File With Two Test Cases
-
-Because:
-- To start implementation of extra feature.
-```
-
--   In case of any concern and queries feel free to ping us in assigned discord channels.
+-   The issue and PR's have linked templates, when you go ahead and create an issue or a PR please follow the template so that if will be easy for the maintainers to review you're pull request or validate you're issue
+-   The project maintainer(s) will let you know if there is any merge conflict and then it's you're job to resolve the merge conflict by taking the help of the mentor.
 
 ## Contributors:
 
-### Credits goes to these people:✨
+### Credits goes to these people: ✨
 
 <table>
 	<tr>

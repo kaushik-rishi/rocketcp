@@ -3,30 +3,9 @@ const fs = require('fs');
 const path = require('path');
 const sh = require('shelljs');
 const commands = require('./commands.json');
+const { fastDiff, rtrimFullString } = require('./executor/diffChecker');
 
 const problemDir = process.cwd();
-
-// trims the block of spaces at the end of a string
-function rtrim(str) {
-    if (str == null) return str;
-    return str.replace(/\s+$/g, '');
-}
-
-// returns wether the solution matches the test or not
-function match(sol, test) {
-    // TODO : use better diff algorithm or diff package to show the difference
-    if (!sol) return false;
-
-    sol = sol.split('\n');
-    test = test.split('\n');
-
-    if (sol.length < test.length) return false;
-
-    for (let i = 0; i < test.length; i += 1)
-        if (rtrim(sol[i]) != rtrim(test[i])) return false;
-
-    return true;
-}
 
 // executes the program file feeding it in the test case files and matching the output against the output files
 function execute(lang) {
@@ -86,31 +65,41 @@ function execute(lang) {
                     .readFileSync(path.join('testcases', opFileName))
                     .toString();
 
-                if (match(expectedOut, out))
-                    console.log(chalk.green(`Passed Test #${fileIndex}`));
+                out = rtrimFullString(out);
+                expectedOut = rtrimFullString(expectedOut);
+
+                let difference = fastDiff(out, expectedOut);
+
+                if (difference === null)
+                    console.log(
+                        chalk.green.underline(`Passed Test #${fileIndex}`)
+                    );
                 else
                     console.log(
-                        chalk.red(`Failed Test ${fileIndex}`) +
-                            chalk.magentaBright('\nExpected Output :\n') +
+                        chalk.red.underline(`Failed Test ${fileIndex}`) +
+                            chalk.magentaBright('\n\nExpected Output :\n') +
                             expectedOut +
-                            chalk.magentaBright('\nRecieved Output :\n') +
-                            out
+                            chalk.magentaBright('\n\nRecieved Output :\n') +
+                            out +
+                            chalk.magentaBright('\n\nDifference : \n') +
+                            difference
                     );
             } else {
                 console.log('\n' + chalk.underline(`Test ${fileIndex}`));
                 console.log(chalk.yellow('No output file found'));
-                console.log(chalk.blue('-------- INPUT --------'));
+                console.log(chalk.blue('Input: '));
                 console.log(
-                    fs
+                    rtrimFullString(
+                        fs
                         .readFileSync(path.join('testcases', inpFileName))
-                        .toString()
-                );
+                        .toString()));
 
-                console.log(chalk.blue('-------- OUTPUT --------'));
+                console.log(chalk.blue('Output: '));
                 console.log(out);
             }
         }
     });
 }
+
 module.exports = execute;
-// execute('cpp')
+execute('cpp');

@@ -14,6 +14,7 @@
         "indent": ["error", 4],
         "quotes": ["error", "single"],
         "semi": ["error", "always"],
+        "linebreak-style": 0,
         "no-use-before-define": 0,
         "no-tabs": 0,
         "no-underscore-dangle": 0,
@@ -45,7 +46,8 @@
                 "bracketSpacing": true,
                 "jsxBracketSameLine": true,
                 "parser": "flow",
-                "semi": true
+                "semi": true,
+                "endOfLine":"auto"
             }
         ]
     }

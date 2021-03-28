@@ -17,7 +17,7 @@ parser.add_argument('mode', {
     type: String,
     choices: ['listen', 'init', 'test'],
     nargs: '?',
-    default: 'server'
+    default: 'listen'
 });
 
 let args = parser.parse_args();

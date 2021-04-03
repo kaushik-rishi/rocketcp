@@ -91,8 +91,10 @@ function execute(lang) {
                 console.log(
                     rtrimFullString(
                         fs
-                        .readFileSync(path.join('testcases', inpFileName))
-                        .toString()));
+                            .readFileSync(path.join('testcases', inpFileName))
+                            .toString()
+                    )
+                );
 
                 console.log(chalk.blue('Output: '));
                 console.log(out);

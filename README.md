@@ -28,33 +28,33 @@ A command line client for parsing and making folders and files for test cases us
 
 #### Join the discord server if you:
 
--   have queries related to the developement of the project
+-   have queries related to the development of the project
 -   want to contribute to the project
 -   need help in getting the tool up and running
 
 ### Checklist:
 
 -   [x] Parse the post request data from the extension
--   [x] Create files for the problems recieved
+-   [x] Create files for the problems received
 -   [x] Change the file creation into folder creation
 -   [x] Make a template directory and copy the template
     -   Template Checklist:
         -   [x] add the problem metadata on the top of the problem file
         -   [x] add only the metadata if template not found
--   [x] Create make file for each folder
+-   [x] Create make a file for each folder
     -   Makefile Checklist:
-        -   [x] run the program agains the test cases
-        -   [x] show the difference in a user readable format (chalk for node js coloring/ bash based coloring)
-        -   [x] Can we have a Makefile in a directory and then use that makefile for all the sub folders [ may be have smaller make files in each sub dir ] - Aim: memory efficient
+        -   [x] run the program against the test cases
+        -   [x] show the difference in a user-readable format (chalk for node js coloring/ bash based coloring)
+        -   [x] Can we have a Makefile in a directory and then use that makefile for all the subfolders [ may be have smaller make files in each sub dir ] - Aim: memory-efficient
 -   [ ] Config files storing user preferences
--   [ ] Ship a binary instead of running the commands using node js. Refer cftool for example (or atleast a npm package that can be installed globally)
+-   [ ] Ship a binary instead of running the commands using node js. Refer cftool for example (or at least a npm package that can be installed globally)
 
 Things to figure out (way above my head as of now):
 
 -   [x] Running the js script from inside the problem directory
-    -   [x] May be use a hash bang `#/usr/bin/env node` and link the file to `bin` using `ln`
--   [x] Making a npm package that can be installed globally ??
--   [ ] Make an extension like `competitive companion` for codechef and codeforces
+    -   [x] Maybe use a hashbang `#/usr/bin/env node` and link the file to `bin` using `ln`
+-   [x] Making an npm package that can be installed globally ??
+-   [ ] Make an extension like `competitive companion` for CodeChef and code forces
 -   [ ] Submit the problem to cf from the cli.
     -   Network checklist:
         -   [ ] Check and understand the csrf token stuff
@@ -69,7 +69,7 @@ Things to figure out (way above my head as of now):
         Aim to use the least dependencies and Especially not use a web framework and build the application using vanilla node js
 
 -   **argparse** - parse the options provided to the CLI tool
--   **mkdirp** - Will rewrite after studying more about path library and seperators and POSIX and NON POSIX URL Like paths
+-   **mkdirp** - Will rewrite after studying more about path library and separators and POSIX and NON POSIX URL Like paths
 -   **shelljs** - For the executor script
 -   **ejs** - For creating make files based on the file name
 -   **fast-diff** - Providing interactive difference
@@ -80,7 +80,7 @@ Things to figure out (way above my head as of now):
 -   **chalk** - For colored terminal printing as this is a CLI tool.
 -   **ora** - For spinner
 
-**Developement Dependencies**
+**Development Dependencies**
 
 -   **husky** - for git precommit hooks
 -   **husky-talisman** - for security purposes
@@ -90,8 +90,8 @@ Things to figure out (way above my head as of now):
 
 ### Small note to contributors:
 
--   Donot involve complexities like using `environment variables` at the start
--   Think of cross platformness later
+-   Do not involve complexities like using `environment variables` at the start
+-   Think of cross platforms later
 -   Make a working version and then focus on refactoring and abstraction
 
 ### Technical details used:

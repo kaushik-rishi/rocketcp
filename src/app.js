@@ -26,7 +26,7 @@ if (args.mode === 'listen') {
 }
 
 if (args.mode === 'init') {
-    console.log('We are working on it');
+    require('./configuration/server');
 }
 
 if (args.mode === 'test') {

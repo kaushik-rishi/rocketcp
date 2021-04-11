@@ -39,6 +39,7 @@
         "argparse": "^2.0.1",
         "chalk": "^2.4.2",
         "ejs": "^3.1.6",
+        "express": "^4.17.1",
         "fast-diff": "^1.2.0",
         "find-free-port": "^2.0.0",
         "mkdirp": "^1.0.4",

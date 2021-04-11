@@ -1,9 +1,12 @@
 const express = require('express');
 const freePorts = require('../serverUtils/freePorts');
+const path = require('path');
 const app = express();
+
+app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 
-app.use('/', express.static('./static_dependencies'));
+app.use('/', express.static(path.join(__dirname, './static_dependencies')));
 
 app.get('/', (req, res) => {
     res.render('index');

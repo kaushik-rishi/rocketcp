@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+	<link rel="stylesheet" href="/styles/style.css">
+	<style>
+		html { padding-bottom: 4rem !important; }
+		body { margin-top: 3rem !important; }
+
+		nav {
+			position: fixed;
+			top: 0;
+			width: 100%;
+			overflow: hidden;
+			background: #d0373c;
+		}
+
+		.form-group { margin: 3rem 0; }
+		.header { color: #f50057; font-size: 18px; }
+
+		#editor {
+			width: 80%;
+			height: 500px;
+		}
+
+		.divider-dotted {
+			border: 0.5px solid #eee;
+			width: 40%;
+			text-align: center;
+			margin-left: 30%;
+			margin-right: 30%;
+			margin-top: 3rem;
+			margin-bottom: 3rem;
+		}
+
+		.sidebar {
+			height: 100%;
+			overflow-x: hidden;
+			position: fixed;
+			top: 0;
+			right: 0;
+		}
+	</style>
+</head>
+
+<body>
+	<div class="container left" style="margin-left: 5rem;">
+		<h4 class="center-align">🚀 Configuration Options</h4>
+		<div class="divider"></div>
+
+		<form>
+			<!-- -------------------------- Default Language --------------------------- -->
+			<div id="def_lang" class="form-group">
+				<p class="header">Choose you're default language</p>
+				<p>
+					<label>
+						<input name="defaultLanguage" type="radio" />
+						<span class="grey-text text-darken-4">C++</span>
+					</label>
+				</p>
+				<p>
+					<label>
+						<input name="defaultLanguage" type="radio" />
+						<span class="grey-text text-darken-4">Python</span>
+					</label>
+				</p>
+				<p>
+					<label>
+						<input name="defaultLanguage" type="radio" />
+						<span class="grey-text text-darken-4">Java</span>
+					</label>
+				</p>
+				<br>
+				<br>
+			</div>
+
+			<div class="divider-dotted"></div>
+
+			<!-- Mount Point -->
+			<div id="mount_point" class="form-group">
+				<p class="header">Where do you want the competitive programming folder to be stored</p>
+
+				<label for="mountPoint">Folder Path</label>
+				<input type="text" class="input-field" id="mountPoint" name="mountPoint" placeholder="/home/darkangel/">
+
+				<br><br>
+			</div>
+
+			<div class="divider-dotted"></div>
+
+			<!-- --------------------- Checkbox: language options ---------------------- -->
+			<div id="add_lang" class="form-group">
+				<p class="header">Select the languages that you also code in</p>
+				<p>
+					<label>
+						<input type="checkbox" />
+						<span class="grey-text text-darken-4">C++</span>
+					</label>
+				</p>
+
+				<p>
+					<label>
+						<input type="checkbox" />
+						<span class="grey-text text-darken-4">Python</span>
+					</label>
+				</p>
+
+				<p>
+					<label>
+						<input type="checkbox" />
+						<span class="grey-text text-darken-4">Java</span>
+					</label>
+				</p>
+
+				<br><br>
+			</div>
+
+			<!-- Language Centric Configuration Form -->
+			<p class="header"><i class="material-icons left">chevron_right</i>Python</p>
+			<div data-lang="python" id="data-lang-python" class="header">
+				<p>
+					<label>
+						<input type="checkbox" />
+						<span class="grey-text text-darken-4">Is this language interpreted</span>
+					</label>
+				</p>
+
+				<br>
+				<h6>Command to compile the program: </h6>
+				<label for="mountPoint">compilation command</label>
+				<input type="text" class="input-field" id="compile" name="compile" placeholder="python3 main.py">
+
+				<h6>Command to interpret the executable: </h6>
+				<label for="mountPoint">interpreting command</label>
+				<input type="text" class="input-field" id="interpret" name="interpret" placeholder="python3 main.py">
+			</div>
+
+			<br><br>
+			<div id="editor">
+				t = 1
+				t = int(input())
+
+				for __ in range(t):
+				print('hello world')
+			</div>
+			<br><br>
+			<a class="waves-effect waves-light btn" style="margin-right: 1rem;">Save</a>
+			<a class="waves-effect waves-light btn">Save and Exit</a>
+		</form>
+	</div>
+
+	<div class="right sidebar" style="margin-right: 5rem; font-size: 17px;">
+		<ul class="section table-of-contents">
+			<li>
+				<a href="#def_lang" class="">Default Language</a>
+			</li>
+			<li>
+				<a href="#mount_point" class="">Directory Mount Point</a>
+			</li>
+			<li>
+				<a href="#add_lang" class="active">Add a new Language</a>
+			</li>
+			<li>
+				<a href="#data-lang-python">Python</a>
+			</li>
+			<li>
+				<a href="#data-lang-cpp">C++</a>
+			</li>
+		</ul>
+	</div>
+
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.4.12/ace.js"
+		integrity="sha512-GZ1RIgZaSc8rnco/8CXfRdCpDxRCphenIiZ2ztLy3XQfCbQUSCuk8IudvNHxkRA3oUg6q0qejgN/qqyG1duv5Q=="
+		crossorigin="anonymous"></script>
+	<script src="/ace-builds/src-noconflict/ace.js" type="text/javascript" charset="utf-8"></script>
+	<script>
+		let editor = ace.edit("editor");
+		editor.setTheme("ace/theme/dracula");
+		editor.getSession().setMode("ace/mode/python");
+		document.getElementById('editor').style.fontSize = '19px';
+
+		editor.container.style.lineHeight = 1.5
+		editor.renderer.updateFontSize()
+	</script>
+
+</body>
+
+</html>

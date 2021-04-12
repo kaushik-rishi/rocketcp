@@ -15,3 +15,10 @@ if (fs.existsSync(process.env.configAddress)) {
         console.log(chalk.red('Config file corupted'));
     }
 }
+if (!global.config) {
+    console.log(
+        'Using default config\n\n' +
+            chalk.blue('Use "rktcp init" to update config')
+    );
+    global.config = require('./defaultconfig.json');
+}

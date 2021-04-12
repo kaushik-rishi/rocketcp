@@ -2,6 +2,7 @@ const express = require('express');
 const freePorts = require('../serverUtils/freePorts');
 const path = require('path');
 const open = require('open');
+const Router = require('./routes/index');
 const app = express();
 
 app.set('views', path.join(__dirname, 'views'));
@@ -9,9 +10,7 @@ app.set('view engine', 'ejs');
 
 app.use('/', express.static(path.join(__dirname, './static_dependencies')));
 
-app.get('/', (req, res) => {
-    res.render('index');
-});
+Router(app);
 
 freePorts.getPort().then((PORT_POST) => {
     if (PORT_POST !== undefined)

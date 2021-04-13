@@ -2,7 +2,7 @@
 'use strict';
 
 // Code for the CLI App
-
+require('./serverUtils/loadconfig');
 const { ArgumentParser } = require('argparse');
 const { version } = require('../package.json');
 

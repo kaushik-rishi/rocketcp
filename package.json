@@ -6,9 +6,6 @@
     "bin": {
         "rkt": "./src/app.js"
     },
-    "engines": {
-        "node": ">=10.0.0"
-    },
     "scripts": {
         "prepare": "husky install",
         "devStart": "nodemon src/server.js",

@@ -17,8 +17,8 @@ if (fs.existsSync(process.env.configAddress)) {
 }
 if (!global.config) {
     console.log(
-        'Using default config\n\n' +
-            chalk.blue('Use "rktcp init" to update config')
+        'Using default config\n' +
+            chalk.blue('Use "rktcp init" to update config\n')
     );
     global.config = require('./defaultconfig.json');
 }

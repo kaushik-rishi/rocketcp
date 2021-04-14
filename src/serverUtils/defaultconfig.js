@@ -13,10 +13,7 @@ const Langs = Object.keys(CodeLib);
 Langs.forEach((lang) => {
     let template = getTemplate(CodeLib[lang].templates[0]);
     defaultconfig.languages[lang] = {
-        name: CodeLib[lang].name,
-        isinterpreted: CodeLib[lang].isinterpreted,
-        compile: CodeLib[lang].compile,
-        run: CodeLib[lang].run,
+        ...CodeLib[lang],
         template,
         templateId: 0
     };

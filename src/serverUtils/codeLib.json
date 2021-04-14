@@ -2,6 +2,7 @@
     "c":{
         "name":"C",
         "isinterpreted": false,
+        "fileName":"Main.c",
         "compile": "gcc Main.c",
         "run": {
             "win32": "a.exe",
@@ -16,6 +17,7 @@
     "cpp": {
         "name":"C++",
         "isinterpreted": false,
+        "fileName":"Main.cpp",
         "compile": "g++ Main.cpp",
         "run": {
             "win32": "a.exe",
@@ -30,6 +32,7 @@
     "python": {
         "name":"Python",
         "isinterpreted": true,
+        "fileName":"Main.py",
         "run": {
             "win32": "python Main.py",
             "unix": "python3 Main.py"
@@ -43,6 +46,7 @@
     "java": {
         "name":"Java",
         "isinterpreted": false,
+        "fileName":"Main.java",
         "compile": "javac Main.java",
         "run": {
             "win32": "java Main.class",

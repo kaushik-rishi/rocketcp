@@ -8,6 +8,9 @@ const ROOT = path.join(os.userInfo().homedir, 'competitivecoding');
 process.env.configAddress = path.join(ROOT, 'config.json');
 process.env.srcAddress = path.join(__dirname, '../');
 
+if (!fs.existsSync(ROOT)) {
+    fs.mkdirSync(ROOT);
+}
 if (fs.existsSync(process.env.configAddress)) {
     try {
         global.config = require(process.env.configAddress);

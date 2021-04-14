@@ -1,0 +1,57 @@
+{
+    "c":{
+        "name":"C",
+        "isinterpreted": false,
+        "compile": "gcc Main.c",
+        "run": {
+            "win32": "a.exe",
+            "unix": "./a.out"
+        },
+        "templates":[{
+            "name":"Basic",
+            "isFromFile":false,
+            "content":"#include <stdio.h>\n"
+        }]
+    },
+    "cpp": {
+        "name":"C++",
+        "isinterpreted": false,
+        "compile": "g++ Main.cpp",
+        "run": {
+            "win32": "a.exe",
+            "unix": "./a.out"
+        },
+        "templates":[{
+            "name":"Basic",
+            "isFromFile":true,
+            "content":"./templates/codes/cpp.txt"
+        }]
+    },
+    "python": {
+        "name":"Python",
+        "isinterpreted": true,
+        "run": {
+            "win32": "python Main.py",
+            "unix": "python3 Main.py"
+        },
+        "templates":[{
+            "name":"Basic",
+            "isFromFile":false,
+            "content":"t=int(input())"
+        }]
+    },
+    "java": {
+        "name":"Java",
+        "isinterpreted": false,
+        "compile": "javac Main.java",
+        "run": {
+            "win32": "java Main.class",
+            "unix": "java Main.class"
+        },
+        "templates":[{
+            "name":"Basic",
+            "isFromFile":false,
+            "content":"import java.utils.*;"
+        }]
+    }
+}

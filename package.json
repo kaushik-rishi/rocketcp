@@ -4,7 +4,7 @@
     "description": "<p align=\"center\"><img src=\"https://media0.giphy.com/media/f6hnhHkks8bk4jwjh3/giphy.gif\" align=\"center\" width=\"200\"></p> <h1 align=\"center\">Rocket Competitive Programming</h1>",
     "main": "src/app.js",
     "bin": {
-        "rkt": "./src/app.js"
+        "rktcp": "./src/app.js"
     },
     "engines": {
         "node": ">=10.0.0"

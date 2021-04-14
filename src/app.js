@@ -13,7 +13,7 @@ const parser = new ArgumentParser({
 
 parser.add_argument('-v', '--version', { action: 'version', version });
 parser.add_argument('mode', {
-    help: 'Allows the user to setup RCP properly',
+    help: 'Allows the user to start RKTCP in different modes',
     type: String,
     choices: ['listen', 'init', 'test'],
     nargs: '?',

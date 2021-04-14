@@ -6,6 +6,7 @@ const chalk = require('chalk');
 const ROOT = path.join(os.userInfo().homedir, 'competitivecoding');
 
 process.env.configAddress = path.join(ROOT, 'config.json');
+process.env.srcAddress = path.join(__dirname, '../');
 
 if (fs.existsSync(process.env.configAddress)) {
     try {
@@ -20,5 +21,5 @@ if (!global.config) {
         'Using default config\n' +
             chalk.blue('Use "rktcp init" to update config\n')
     );
-    global.config = require('./defaultconfig.json');
+    global.config = require('./defaultconfig');
 }

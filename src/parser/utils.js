@@ -30,7 +30,7 @@ function getProblemCode(problemName) {
 function getFolderName(folderName) {
     // TODO : make folder based on different cp platforms
     var platform = folderName.split(' - ');
-    return platform[0].trim();
+    return `${platform[0].trim()}/${platform.slice(1).join('-').trim()}`;
 }
 
 module.exports = {

@@ -41,4 +41,4 @@ py:
         printf "${RED}Test Case 2 Failed${NC} \n\n"; \
     fi
 noConfig:
-	@printf "${RED}Default Language Not Configured${NC} \n\n${Blue}Run : rcp init${Grey}\nTo choose your default language...";
+	@printf "${RED}Default Language Not Configured${NC} \n\n${Blue}Run : rktcp init${Grey}\nTo choose your default language...";

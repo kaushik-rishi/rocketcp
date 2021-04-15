@@ -16,7 +16,7 @@ function execute(lang) {
     if (!commands[lang]) {
         console.log(
             `${chalk.red('This language is not added to this problem')}
- ${chalk.blue('Run : rcp --add=')}${chalk.yellow('<Your Lang>')}
+ ${chalk.blue('Run : rktcp --add=')}${chalk.yellow('<Your Lang>')}
  To add a specific language to this problem.`
         );
     }

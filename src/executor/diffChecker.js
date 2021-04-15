@@ -30,7 +30,7 @@ function getDifference(output, expectedOut) {
     output = rtrimFullString(output);
     expectedOut = rtrimFullString(expectedOut);
 
-    let difference = diff(output, expectedOut);
+    const difference = diff(output, expectedOut);
 
     if (difference.length === 1 && difference[0][0] === 0) {
         // if no difference is encounteres the difference list looks like this : [ [ 0, 'samestring' ] ]

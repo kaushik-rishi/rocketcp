@@ -20,7 +20,7 @@ parser.add_argument('mode', {
     default: 'listen'
 });
 
-let args = parser.parse_args();
+const args = parser.parse_args();
 if (args.mode === 'listen') {
     require('./server');
 }

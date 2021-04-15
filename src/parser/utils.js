@@ -7,7 +7,7 @@ function commentifyMetaData(problemMetaData) {
 }
 
 function saveSamples(problemTestsDir, sampleTests, isInteractive) {
-    let interactive = isInteractive ? 'interactive-' : '';
+    const interactive = isInteractive ? 'interactive-' : '';
     sampleTests.forEach((test, index) => {
         fileUtils.createWrite(
             problemTestsDir,

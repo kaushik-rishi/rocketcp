@@ -30,5 +30,5 @@ if (args.mode === 'init') {
 }
 
 if (args.mode === 'test') {
-    require('./executor');
+    require('./executor/index');
 }

@@ -1,9 +1,8 @@
 const fileUtils = require('../fileUtils');
 
-function commentifyMetaData(problemMetaData) {
-    // TODO : add comments based on language
-    problemMetaData = '/*\n' + problemMetaData + '\n*/\n';
-    return problemMetaData;
+function commentifyMetaData(syntax, problemMetaData) {
+    problemMetaData = syntax + problemMetaData;
+    return problemMetaData.split('\n').join('\n' + syntax) + '\n\n';
 }
 
 function saveSamples(problemTestsDir, sampleTests, isInteractive) {

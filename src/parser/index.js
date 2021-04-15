@@ -5,10 +5,9 @@ const path = require('path');
 const parserUtils = require('./utils');
 
 const ROOT = path.resolve(global.config.mountPoint);
-const FILE_Name =
-    global.config.languages[global.config.defaultLanguage].fileName;
-const templateContent =
-    global.config.languages[global.config.defaultLanguage].template;
+const Lang = global.config.languages[global.config.defaultLanguage];
+const FILE_Name = Lang.fileName;
+const templateContent = Lang.template;
 
 function parser(data, spinner) {
     const {
@@ -36,7 +35,10 @@ function parser(data, spinner) {
         let problemMetaData = `Name of problem: ${problemName}\nContest: ${folderName}\nLink to problem: ${problemUrl}\nTime Limit: ${
             timeLimit / 1000
         } second(s)\nMemory Limit: ${memoryLimit} mb`;
-        problemMetaData = parserUtils.commentifyMetaData(problemMetaData);
+        problemMetaData = parserUtils.commentifyMetaData(
+            Lang.comments,
+            problemMetaData
+        );
 
         fileUtils.write(
             problemDir,

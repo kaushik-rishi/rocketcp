@@ -28,6 +28,7 @@ parser.add_argument('-d', '--dir', {
 });
 
 const args = parser.parse_args();
+global.args = args;
 
 if (args.lang) {
     global.config.defaultLanguage = args.lang;

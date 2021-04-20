@@ -9,6 +9,18 @@ const {
     rtrimFullString
 } = require('./diffChecker');
 
+if (global.args.dir) {
+    try {
+        process.chdir(path.resolve(global.args.dir));
+    } catch (e) {
+        console.log(e);
+        throw new Error(
+            chalk.red(
+                'Unable to mount on the provided directory!!!\n\nTerminating...'
+            )
+        );
+    }
+}
 const problemDir = process.cwd();
 
 // executes the program file feeding it in the test case files and matching the output against the output files
@@ -109,6 +121,6 @@ function execute(lang) {
     });
 }
 
-execute('cpp');
+execute(global.config.defaultLanguage);
 
 module.exports = execute;

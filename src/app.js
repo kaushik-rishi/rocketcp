@@ -26,6 +26,10 @@ parser.add_argument('-l', '--lang', {
 parser.add_argument('-d', '--dir', {
     help: 'OverRides the default directory of operations.'
 });
+parser.add_argument('-w', '--watch', {
+    action: 'store_true',
+    help: 'Used in test mode to run automatically when source code is updated'
+});
 
 const args = parser.parse_args();
 global.args = args;

@@ -2,6 +2,9 @@ const chalk = require('chalk');
 const fs = require('fs');
 const path = require('path');
 const sh = require('shelljs');
+const cluster = require('cluster');
+const chokidar = require('chokidar');
+
 const commands = require('../commands.json');
 const {
     getDiffString,
@@ -21,7 +24,9 @@ if (global.args.dir) {
         );
     }
 }
+
 const problemDir = process.cwd();
+const Lang = global.config.languages[global.config.defaultLanguage];
 
 // executes the program file feeding it in the test case files and matching the output against the output files
 function execute(lang) {
@@ -121,6 +126,45 @@ function execute(lang) {
     });
 }
 
-execute(global.config.defaultLanguage);
+if (cluster.isMaster && global.args.watch) {
+    console.log(
+        chalk.gray(
+            '[Watcher] Watching file : ' +
+                path.join(problemDir, Lang.fileName + '\n')
+        )
+    );
+    cluster.fork();
+    let wait = false;
+    chokidar.watch(path.join(problemDir, Lang.fileName)).on('change', () => {
+        if (wait) return;
+        wait = setTimeout(() => {
+            wait = false;
+        }, 500);
+        console.log(
+            chalk.keyword('gray')('\n[Watcher] Restarting due to changes...\n')
+        );
+        for (const id in cluster.workers) {
+            console.log(id);
+            cluster.workers[id].destroy();
+        }
+        cluster.fork();
+    });
+} else {
+    console.log(
+        chalk.keyword('gray')(
+            '[Watcher] Starting test for ' +
+                global.config.defaultLanguage +
+                '\n'
+        )
+    );
+    execute(global.config.defaultLanguage);
+    console.log(
+        chalk.keyword('gray')(
+            '\n[Watcher] Test complete.\n[Watcher] Waiting for changes to restart...'
+        )
+    );
+    // eslint-disable-next-line no-process-exit
+    process.exit(0);
+}
 
 module.exports = execute;

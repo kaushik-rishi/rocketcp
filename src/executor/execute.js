@@ -3,26 +3,15 @@ const sh = require('shelljs');
 const chalk = require('chalk');
 const path = require('path');
 
-const commands = require('../commands.json');
 const {
     getDiffString,
     getDifference,
     rtrimFullString
 } = require('./diffChecker');
 
-const problemDir = process.cwd();
-
 // executes the program file feeding it in the test case files and matching the output against the output files
-function execute(lang) {
-    if (!commands[lang]) {
-        console.log(
-            `${chalk.red('This language is not added to this problem')}
- ${chalk.blue('Run : rktcp --add=')}${chalk.yellow('<Your Lang>')}
- To add a specific language to this problem.`
-        );
-    }
-
-    const commandsData = commands[lang];
+function execute(lang, problemDir) {
+    const commandsData = global.config.languages[lang];
     const compileCommand = commandsData['compile'];
     const runCommand =
         commandsData['run'][process.platform === 'win32' ? 'win32' : 'unix'];

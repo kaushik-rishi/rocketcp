@@ -52,7 +52,7 @@ if (cluster.isMaster && global.args.watch) {
                 '\n'
         )
     );
-    execute(global.config.defaultLanguage);
+    execute(global.config.defaultLanguage, problemDir);
     console.log(
         chalk.keyword('gray')(
             '\n[Watcher] Test complete.\n[Watcher] Waiting for changes to restart...'

@@ -105,7 +105,7 @@ function execute(lang, problemDir) {
     if (global.args.interactive) return interactiveRun(runCommand);
 
     console.log(
-        chalk.keyword('orange')('Running the code against test cases ..\n')
+        chalk.keyword('orange')('Running the code against test cases ...')
     );
     getTestIndices(problemDir).forEach((fileIndex) =>
         runTestCase(runCommand, fileIndex)

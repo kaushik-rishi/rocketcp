@@ -5,7 +5,7 @@ const chokidar = require('chokidar');
 
 const execute = require('./execute');
 
-if (global.args.dir) {
+if (cluster.isMaster && global.args.dir) {
     try {
         process.chdir(path.resolve(global.args.dir));
     } catch (e) {

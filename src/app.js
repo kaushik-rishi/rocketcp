@@ -24,6 +24,7 @@ parser.add_argument('-l', '--lang', {
     choices: Object.keys(global.config.languages)
 });
 parser.add_argument('-d', '--dir', {
+    type: 'str',
     help: 'OverRides the default directory of operations.'
 });
 parser.add_argument('-w', '--watch', {
@@ -36,14 +37,16 @@ parser.add_argument('-i', '--interactive', {
 });
 
 const args = parser.parse_args();
-global.args = args;
 
 if (args.lang) {
     global.config.defaultLanguage = args.lang;
 }
 if (args.dir) {
+    args.dir = args.dir.replace(/^["']+|["']+$/, '');
     global.config.mountPoint = args.dir;
 }
+
+global.args = args;
 
 if (args.mode === 'listen') {
     require('./server');

@@ -1,9 +1,9 @@
 const chalk = require('chalk');
 const path = require('path');
 const cluster = require('cluster');
-const chokidar = require('chokidar');
 
 const execute = require('./execute');
+const watcher = require('./watcher');
 
 if (cluster.isMaster && global.args.dir) {
     try {
@@ -19,47 +19,32 @@ if (cluster.isMaster && global.args.dir) {
 }
 
 const problemDir = process.cwd();
-const Lang = global.config.languages[global.config.defaultLanguage];
 
-if (cluster.isMaster && global.args.watch) {
+const starting = () => {
+    if (!global.args.watch) return;
     console.log(
-        chalk.gray(
-            '[Watcher] Watching file : ' +
-                path.join(problemDir, Lang.fileName + '\n')
+        chalk.keyword('gray')(
+            '[Watcher] Starting test for ' +
+                global.config.defaultLanguage +
+                '\n'
         )
     );
-    cluster.fork();
-    let wait = false;
-    chokidar.watch(path.join(problemDir, Lang.fileName)).on('change', () => {
-        if (wait) return;
-        wait = setTimeout(() => {
-            wait = false;
-        }, 500);
-        console.log(
-            chalk.keyword('gray')('\n[Watcher] Restarting due to changes...\n')
-        );
-        for (const id in cluster.workers) {
-            console.log(id);
-            cluster.workers[id].destroy();
-        }
-        cluster.fork();
-    });
-} else {
-    if (global.args.watch)
-        console.log(
-            chalk.keyword('gray')(
-                '[Watcher] Starting test for ' +
-                    global.config.defaultLanguage +
-                    '\n'
-            )
-        );
+};
+
+const finished = () => {
+    if (!global.args.watch) return;
+    console.log(
+        chalk.keyword('gray')(
+            '\n[Watcher] Test complete.\n[Watcher] Waiting for changes to restart...'
+        )
+    );
+};
+
+if (!watcher()) {
+    starting();
     execute(global.config.defaultLanguage, problemDir);
-    if (global.args.watch)
-        console.log(
-            chalk.keyword('gray')(
-                '\n[Watcher] Test complete.\n[Watcher] Waiting for changes to restart...'
-            )
-        );
+    finished();
+
     // eslint-disable-next-line no-process-exit
     process.exit(0);
 }

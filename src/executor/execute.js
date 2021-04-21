@@ -2,6 +2,7 @@ const fs = require('fs');
 const sh = require('shelljs');
 const chalk = require('chalk');
 const path = require('path');
+const child_process = require('child_process');
 
 const {
     getDiffString,
@@ -86,6 +87,10 @@ const runTestCase = (runCommand, fileIndex) => {
     console.log(rtrimFullString(out));
 };
 
+const interactiveRun = (runCommand) => {
+    child_process.execFileSync(runCommand, [], { stdio: 'inherit' });
+};
+
 // executes the program file feeding it in the test case files and matching the output against the output files
 function execute(lang, problemDir) {
     const commandsData = global.config.languages[lang];
@@ -97,10 +102,11 @@ function execute(lang, problemDir) {
         if (!compile(compileCommand)) return;
     }
 
+    if (global.args.interactive) return interactiveRun(runCommand);
+
     console.log(
         chalk.keyword('orange')('Running the code against test cases ..\n')
     );
-
     getTestIndices(problemDir).forEach((fileIndex) =>
         runTestCase(runCommand, fileIndex)
     );

@@ -30,6 +30,10 @@ parser.add_argument('-w', '--watch', {
     action: 'store_true',
     help: 'Used in test mode to run automatically when source code is updated'
 });
+parser.add_argument('-i', '--interactive', {
+    action: 'store_true',
+    help: 'Used in test mode to run the source code in a interactive way.'
+});
 
 const args = parser.parse_args();
 global.args = args;

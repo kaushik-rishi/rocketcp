@@ -41,6 +41,7 @@
     "dependencies": {
         "argparse": "^2.0.1",
         "chalk": "^2.4.2",
+        "child_process": "^1.0.2",
         "chokidar": "^3.5.1",
         "cluster": "^0.7.7",
         "ejs": "^3.1.6",

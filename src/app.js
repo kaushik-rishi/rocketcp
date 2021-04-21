@@ -35,6 +35,11 @@ parser.add_argument('-i', '--interactive', {
     action: 'store_true',
     help: 'Used in test mode to run the source code in a interactive way.'
 });
+parser.add_argument('--show-diff', {
+    action: 'store_true',
+    help:
+        'Used in test mode to show the difference between current output and expected output.'
+});
 
 const args = parser.parse_args();
 

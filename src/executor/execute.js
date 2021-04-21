@@ -51,6 +51,9 @@ const evaulateTestCase = (fileIndex, inputContent, out, opFilePath) => {
     console.log(rtrimFullString(expectedOut));
     console.log(chalk.magentaBright.underline('\nRecieved Output'));
     console.log(rtrimFullString(out));
+
+    if (!global.args.show_diff) return;
+
     console.log(chalk.yellow.underline('\nDifference'));
     console.log(getDiffString(difference));
 };

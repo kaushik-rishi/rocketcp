@@ -45,19 +45,21 @@ if (cluster.isMaster && global.args.watch) {
         cluster.fork();
     });
 } else {
-    console.log(
-        chalk.keyword('gray')(
-            '[Watcher] Starting test for ' +
-                global.config.defaultLanguage +
-                '\n'
-        )
-    );
+    if (global.args.watch)
+        console.log(
+            chalk.keyword('gray')(
+                '[Watcher] Starting test for ' +
+                    global.config.defaultLanguage +
+                    '\n'
+            )
+        );
     execute(global.config.defaultLanguage, problemDir);
-    console.log(
-        chalk.keyword('gray')(
-            '\n[Watcher] Test complete.\n[Watcher] Waiting for changes to restart...'
-        )
-    );
+    if (global.args.watch)
+        console.log(
+            chalk.keyword('gray')(
+                '\n[Watcher] Test complete.\n[Watcher] Waiting for changes to restart...'
+            )
+        );
     // eslint-disable-next-line no-process-exit
     process.exit(0);
 }

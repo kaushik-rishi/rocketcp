@@ -10,7 +10,7 @@ router.get('/', (req, res) => {
 
 router.post('/', (req, res) => {
     try {
-        const config = req.body;
+        let config = req.body;
         config.version = global.config.version;
         validateConfig(config);
         const langs = Object.keys(config.languages);

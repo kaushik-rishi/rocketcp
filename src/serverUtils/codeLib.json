@@ -4,7 +4,6 @@
         "isinterpreted": false,
         "fileName":"Main.c",
         "compile": "gcc Main.c",
-        "comments":"// ",
         "run": {
             "win32": "a.exe",
             "unix": "./a.out"
@@ -20,7 +19,6 @@
         "isinterpreted": false,
         "fileName":"Main.cpp",
         "compile": "g++ Main.cpp",
-        "comments":"// ",
         "run": {
             "win32": "a.exe",
             "unix": "./a.out"
@@ -35,7 +33,6 @@
         "name":"Python",
         "isinterpreted": true,
         "fileName":"Main.py",
-        "comments":"# ",
         "run": {
             "win32": "python Main.py",
             "unix": "python3 Main.py"
@@ -51,7 +48,6 @@
         "isinterpreted": false,
         "fileName":"Main.java",
         "compile": "javac Main.java",
-        "comments":"// ",
         "run": {
             "win32": "java Main.class",
             "unix": "java Main.class"

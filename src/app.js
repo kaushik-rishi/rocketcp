@@ -19,8 +19,28 @@ parser.add_argument('mode', {
     nargs: '?',
     default: 'listen'
 });
+parser.add_argument('-l', '--lang', {
+    help: 'OverRides the default language.',
+    choices: Object.keys(global.config.languages)
+});
+parser.add_argument('-d', '--dir', {
+    help: 'OverRides the default directory of operations.'
+});
+parser.add_argument('-w', '--watch', {
+    action: 'store_true',
+    help: 'Used in test mode to run automatically when source code is updated'
+});
 
-let args = parser.parse_args();
+const args = parser.parse_args();
+global.args = args;
+
+if (args.lang) {
+    global.config.defaultLanguage = args.lang;
+}
+if (args.dir) {
+    global.config.mountPoint = args.dir;
+}
+
 if (args.mode === 'listen') {
     require('./server');
 }

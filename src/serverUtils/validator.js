@@ -10,6 +10,7 @@ const configSchema = Joi.object({
             isinterpreted: Joi.boolean().default(false).required(),
             fileName: Joi.string().min(3).required(),
             compile: Joi.string(),
+            comments: Joi.string().min(1),
             run: Joi.object({
                 win32: Joi.string().required(),
                 unix: Joi.string().required()

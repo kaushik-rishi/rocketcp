@@ -12,6 +12,10 @@
     "rules": {
         "node/shebang": "error",
         "indent": ["error", 4],
+        "prefer-const": ["error", {
+            "destructuring": "any",
+            "ignoreReadBeforeAssign": false
+        }],
         "quotes": ["error", "single"],
         "semi": ["error", "always"],
         "linebreak-style": 0,

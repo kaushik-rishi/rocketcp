@@ -21,14 +21,14 @@ function execute(lang) {
         );
     }
 
-    let commandsData = commands[lang];
-    let compileCommand = commandsData['compile'];
-    let runCommand =
+    const commandsData = commands[lang];
+    const compileCommand = commandsData['compile'];
+    const runCommand =
         commandsData['run'][process.platform === 'win32' ? 'win32' : 'unix'];
 
     if (!runCommand.isinterpreted) {
         console.log(chalk.blue('Compiling...'));
-        let compilationResult = sh.exec(compileCommand);
+        const compilationResult = sh.exec(compileCommand);
 
         if (compilationResult.code !== 0)
             return console.log(chalk.red('Compilation Failed.'));
@@ -36,12 +36,12 @@ function execute(lang) {
         console.log(chalk.green('Compiled Successfully.') + '\n');
     }
 
-    let testCaseFiles = fs.readdirSync(path.join(problemDir, 'testcases'));
-    let inputFileRegex = new RegExp(/in([1-9])*\.txt/);
-    let inputFileIndices = [];
+    const testCaseFiles = fs.readdirSync(path.join(problemDir, 'testcases'));
+    const inputFileRegex = new RegExp(/in([1-9])*\.txt/);
+    const inputFileIndices = [];
 
     testCaseFiles.forEach((fname) => {
-        let match = fname.match(inputFileRegex);
+        const match = fname.match(inputFileRegex);
         if (match) inputFileIndices.push(match[1]);
     });
 
@@ -50,14 +50,16 @@ function execute(lang) {
     );
 
     inputFileIndices.forEach((fileIndex) => {
-        let inpFilePath = path.join('testcases', `in${fileIndex}.txt`);
-        let opFilePath = path.join('testcases', `out${fileIndex}.txt`);
-        let inputContent = rtrimFullString(
+        const inpFilePath = path.join('testcases', `in${fileIndex}.txt`);
+        const opFilePath = path.join('testcases', `out${fileIndex}.txt`);
+        const inputContent = rtrimFullString(
             fs.readFileSync(inpFilePath).toString()
         );
 
-        let result = sh.exec(runCommand + '<' + inpFilePath, { silent: true });
-        let out = result.stdout;
+        const result = sh.exec(runCommand + '<' + inpFilePath, {
+            silent: true
+        });
+        const out = result.stdout;
 
         if (result.code !== 0) {
             console.log(
@@ -68,9 +70,9 @@ function execute(lang) {
             );
         } else {
             if (fs.existsSync(opFilePath)) {
-                let expectedOut = fs.readFileSync(opFilePath).toString();
+                const expectedOut = fs.readFileSync(opFilePath).toString();
 
-                let difference = getDifference(out, expectedOut);
+                const difference = getDifference(out, expectedOut);
                 if (difference === null)
                     console.log(
                         chalk.green.underline(`\nPassed Test #${fileIndex}\n`)

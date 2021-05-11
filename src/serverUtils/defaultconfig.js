@@ -11,7 +11,7 @@ const defaultconfig = {
 const Langs = Object.keys(CodeLib);
 
 Langs.forEach((lang) => {
-    let template = getTemplate(CodeLib[lang].templates[0]);
+    const template = getTemplate(CodeLib[lang].templates[0]);
     defaultconfig.languages[lang] = {
         ...CodeLib[lang],
         template,

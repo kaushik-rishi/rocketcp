@@ -3,6 +3,7 @@ const sh = require('shelljs');
 const chalk = require('chalk');
 const path = require('path');
 const child_process = require('child_process');
+const cluster = require('cluster');
 
 const {
     getDiffString,
@@ -10,9 +11,14 @@ const {
     rtrimFullString
 } = require('./diffChecker');
 
+let compileProcess = null;
+let runProcess = null;
+
 const compile = (compileCommand) => {
     console.log(chalk.blue('Compiling...'));
-    const compilationResult = sh.exec(compileCommand);
+    compileProcess = sh.exec(compileCommand);
+    const compilationResult = compileProcess;
+    compileProcess = null;
 
     if (compilationResult.code !== 0) {
         console.log(chalk.red('Compilation Failed.'));
@@ -64,10 +70,11 @@ const runTestCase = (runCommand, fileIndex) => {
     const inputContent = rtrimFullString(
         fs.readFileSync(inpFilePath).toString()
     );
-
-    const result = sh.exec(runCommand + '<' + inpFilePath, {
+    runProcess = sh.exec(runCommand + '<' + inpFilePath, {
         silent: true
     });
+    const result = runProcess;
+    runProcess = null;
 
     const out = result.stdout;
 
@@ -91,7 +98,17 @@ const runTestCase = (runCommand, fileIndex) => {
 };
 
 const interactiveRun = (runCommand) => {
-    child_process.execFileSync(runCommand, [], { stdio: 'inherit' });
+    return new Promise((resolve) => {
+        runProcess = child_process.exec(runCommand);
+        runProcess.stdout.pipe(process.stdout);
+        process.stdin.pipe(runProcess.stdin);
+        runProcess.on('exit', () => {
+            process.stdin.unpipe(runProcess.stdin);
+            runProcess = null;
+            resolve();
+        });
+    });
+    // await new Promise((resolve) => setTimeout(resolve, 100000));
 };
 
 // executes the program file feeding it in the test case files and matching the output against the output files
@@ -114,5 +131,14 @@ function execute(lang, problemDir) {
         runTestCase(runCommand, fileIndex)
     );
 }
-
+if (cluster.isWorker) {
+    process.on('message', function (m) {
+        if (m == 'exit') {
+            if (compileProcess) compileProcess.kill();
+            if (runProcess) runProcess.kill();
+            // eslint-disable-next-line no-process-exit
+            process.exit(0);
+        }
+    });
+}
 module.exports = execute;

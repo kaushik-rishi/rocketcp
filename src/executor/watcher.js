@@ -3,9 +3,7 @@ const chokidar = require('chokidar');
 const chalk = require('chalk');
 const path = require('path');
 
-const watcher = () => {
-    if (!(cluster.isMaster && global.args.watch)) return false;
-
+if (cluster.isMaster && global.args.watch) {
     const problemDir = process.cwd();
     const Lang = global.config.languages[global.config.defaultLanguage];
 
@@ -26,11 +24,8 @@ const watcher = () => {
             chalk.keyword('gray')('\n[Watcher] Restarting due to changes...\n')
         );
         for (const id in cluster.workers) {
-            cluster.workers[id].destroy();
+            cluster.workers[id].send('exit');
         }
         cluster.fork();
     });
-    return true;
-};
-
-module.exports = watcher;
+}

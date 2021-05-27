@@ -1,7 +1,7 @@
 ﻿<p align="center"><img src="https://media0.giphy.com/media/f6hnhHkks8bk4jwjh3/giphy.gif" align="center" width="200"></p>
 <h1 align="center">Rocket Competitive Programming</h1>
 
-A command-line client for parsing and making folders and files for test cases using the competitive companion extension and testing the solution. Building this with an 🎯 aim of making Competitive Programming More Productive
+A command line client for parsing and making folders and files for test cases using the competitive companion extension and testing the solution. Building this with an 🎯 aim of making Competitive Programming More Productive
 
 ---
 
@@ -40,7 +40,7 @@ A command-line client for parsing and making folders and files for test cases us
 -   [x] Make a template directory and copy the template
     -   Template Checklist:
         -   [x] add the problem metadata on the top of the problem file
-        -   [x] add only the metadata if the template not found
+        -   [x] add only the metadata if template not found
 -   [x] Create make a file for each folder
     -   Makefile Checklist:
         -   [x] run the program against the test cases
@@ -86,7 +86,7 @@ Things to figure out (way above my head as of now):
 -   **husky-talisman** - for security purposes
 -   **prettier** - used to format the code in the pre commit hook
 -   **jest** - for writing unit tests
--   **nodemon** - running the server while development
+-   **nodemon** - running the server while developement
 
 ### Small note to contributors:
 
@@ -105,7 +105,7 @@ Things to figure out (way above my head as of now):
 
 ---
 
--   The issue and PR's have linked templates, when you go ahead and create an issue or a PR please follow the template so that it will be easy for the maintainers to review your pull request or validate your issue
+-   The issue and PR's have linked templates, when you go ahead and create an issue or a PR please follow the template so that if will be easy for the maintainers to review you're pull request or validate you're issue
 -   The project maintainer(s) will let you know if there is any merge conflict and then it's you're job to resolve the merge conflict by taking the help of the mentor.
 
 ## Contributors:

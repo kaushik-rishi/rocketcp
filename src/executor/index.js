@@ -1,11 +1,8 @@
 const chalk = require('chalk');
 const path = require('path');
 const cluster = require('cluster');
-const chokidar = require('chokidar');
 
-const execute = require('./execute');
-
-if (global.args.dir) {
+if (cluster.isMaster && global.args.dir) {
     try {
         process.chdir(path.resolve(global.args.dir));
     } catch (e) {
@@ -18,46 +15,40 @@ if (global.args.dir) {
     }
 }
 
-const problemDir = process.cwd();
-const Lang = global.config.languages[global.config.defaultLanguage];
+require('./watcher');
 
-if (cluster.isMaster && global.args.watch) {
-    console.log(
-        chalk.gray(
-            '[Watcher] Watching file : ' +
-                path.join(problemDir, Lang.fileName + '\n')
-        )
-    );
-    cluster.fork();
-    let wait = false;
-    chokidar.watch(path.join(problemDir, Lang.fileName)).on('change', () => {
-        if (wait) return;
-        wait = setTimeout(() => {
-            wait = false;
-        }, 500);
+const main = async () => {
+    const execute = require('./execute');
+
+    const problemDir = process.cwd();
+
+    const starting = () => {
+        if (!global.args.watch) return;
         console.log(
-            chalk.keyword('gray')('\n[Watcher] Restarting due to changes...\n')
+            chalk.keyword('gray')(
+                '[Watcher] Starting test for ' +
+                    global.config.defaultLanguage +
+                    '\n'
+            )
         );
-        for (const id in cluster.workers) {
-            console.log(id);
-            cluster.workers[id].destroy();
-        }
-        cluster.fork();
+    };
+
+    const finished = () => {
+        if (!global.args.watch) return;
+        console.log(
+            chalk.keyword('gray')(
+                '\n[Watcher] Test complete.\n[Watcher] Waiting for changes to restart...'
+            )
+        );
+    };
+
+    starting();
+    await execute(global.config.defaultLanguage, problemDir);
+    finished();
+};
+if (!(cluster.isMaster && global.args.watch)) {
+    main().finally(() => {
+        // eslint-disable-next-line no-process-exit
+        process.exit(0);
     });
-} else {
-    console.log(
-        chalk.keyword('gray')(
-            '[Watcher] Starting test for ' +
-                global.config.defaultLanguage +
-                '\n'
-        )
-    );
-    execute(global.config.defaultLanguage, problemDir);
-    console.log(
-        chalk.keyword('gray')(
-            '\n[Watcher] Test complete.\n[Watcher] Waiting for changes to restart...'
-        )
-    );
-    // eslint-disable-next-line no-process-exit
-    process.exit(0);
 }

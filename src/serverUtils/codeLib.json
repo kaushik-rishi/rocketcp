@@ -11,8 +11,12 @@
         },
         "templates":[{
             "name":"Basic",
-            "isFromFile":false,
-            "content":"#include <stdio.h>\n"
+            "isFromFile":true,
+            "content":"./templates/codes/c.txt"
+        },{
+            "name":"Intermediate",
+            "isFromFile":true,
+            "content":"./templates/codes/cInter.txt"
         }]
     },
     "cpp": {
@@ -29,6 +33,14 @@
             "name":"Basic",
             "isFromFile":true,
             "content":"./templates/codes/cpp.txt"
+        },{
+            "name":"Intermediate",
+            "isFromFile":true,
+            "content":"./templates/codes/cppInter.txt"
+        },{
+            "name":"Advance",
+            "isFromFile":true,
+            "content":"./templates/codes/cppAdv.txt"
         }]
     },
     "python": {
@@ -42,8 +54,8 @@
         },
         "templates":[{
             "name":"Basic",
-            "isFromFile":false,
-            "content":"t=int(input())"
+            "isFromFile":true,
+            "content":"./templates/codes/python.py"
         }]
     },
     "java": {

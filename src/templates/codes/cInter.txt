@@ -1,0 +1,28 @@
+#include <stdio.h>
+#include<math.h>
+
+void print(int result)
+{
+    printf("%d\n",result);
+}
+int scanner()
+{
+    int n;
+    scanf("%d",&n);
+    return n;
+}
+
+int solve()
+{
+    // Your code here
+}
+
+int main()
+{
+	int t=scanner();
+  	while(t--)
+    {
+	    print(solve());
+    }
+	return 0;
+}

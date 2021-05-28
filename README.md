@@ -24,7 +24,7 @@ A command line client for parsing and making folders and files for test cases us
 
 ---
 
-### Here is our discord server link - [https://discord.gg/axfEwf6K](https://discord.gg/axfEwf6K)
+### Here is our discord server link - [https://discord.com/channels/818724344359288842/818724344359288845](https://discord.com/channels/818724344359288842/818724344359288845)
 
 #### Join the discord server if you:
 

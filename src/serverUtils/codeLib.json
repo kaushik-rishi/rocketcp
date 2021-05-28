@@ -29,6 +29,10 @@
             "name":"Basic",
             "isFromFile":true,
             "content":"./templates/codes/cpp.txt"
+        },{
+            "name":"Advance",
+            "isFromFile":true,
+            "content":"./templates/codes/cppAdv.txt"
         }]
     },
     "python": {

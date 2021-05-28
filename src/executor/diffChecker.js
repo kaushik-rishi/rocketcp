@@ -62,5 +62,7 @@ function fastDiff(output, expectedOut) {
 
 module.exports = {
     fastDiff,
+    getDiffString,
+    getDifference,
     rtrimFullString    
 }

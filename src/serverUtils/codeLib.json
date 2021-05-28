@@ -11,8 +11,8 @@
         },
         "templates":[{
             "name":"Basic",
-            "isFromFile":false,
-            "content":"#include <stdio.h>\n"
+            "isFromFile":true,
+            "content":"./templates/codes/c.txt"
         }]
     },
     "cpp": {

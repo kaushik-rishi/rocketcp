@@ -54,8 +54,8 @@
         },
         "templates":[{
             "name":"Basic",
-            "isFromFile":false,
-            "content":"t=int(input())"
+            "isFromFile":true,
+            "content":"./templates/codes/python.py"
         }]
     },
     "java": {

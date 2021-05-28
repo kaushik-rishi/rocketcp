@@ -30,6 +30,10 @@
             "isFromFile":true,
             "content":"./templates/codes/cpp.txt"
         },{
+            "name":"Intermediate",
+            "isFromFile":true,
+            "content":"./templates/codes/cppInter.txt"
+        },{
             "name":"Advance",
             "isFromFile":true,
             "content":"./templates/codes/cppAdv.txt"

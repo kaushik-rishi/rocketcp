@@ -13,6 +13,10 @@
             "name":"Basic",
             "isFromFile":true,
             "content":"./templates/codes/c.txt"
+        },{
+            "name":"Intermediate",
+            "isFromFile":true,
+            "content":"./templates/codes/cInter.txt"
         }]
     },
     "cpp": {

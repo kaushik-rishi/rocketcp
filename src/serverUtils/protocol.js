@@ -6,9 +6,15 @@ exports.register = () => {
         protocol: 'rktcp',
         command: 'rktcp --url="$_URL_"',
         terminal: true,
-        script: true
+        script: true,
+        override: true
     }).catch((e) => {
         console.log(e);
         console.log(chalk.red('Unable to register rktcp protocol'));
     });
+};
+
+exports.decodeUrl = (url) => {
+    console.log(url);
+    return {};
 };

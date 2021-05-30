@@ -18,5 +18,11 @@ exports.register = () => {
 exports.decodeUrl = (url, modes, defaultMode) => {
     const parsed = Url(url, true);
     if (modes.includes(parsed.hostname)) defaultMode = parsed.hostname;
-    return { mode: defaultMode, ...parsed.query };
+    const args = { mode: defaultMode };
+    if (parsed.query.lang) {
+        if (Object.keys(global.config.languages).includes(parsed.query.lang))
+            args.lang = parsed.query.lang;
+        else throw new Error(chalk.red('Unknown lang : ' + parsed.query.lang));
+    }
+    return args;
 };

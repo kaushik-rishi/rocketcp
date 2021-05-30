@@ -3,6 +3,7 @@ const freePorts = require('../serverUtils/freePorts');
 const path = require('path');
 const open = require('open');
 const Router = require('./routes/index');
+const { register } = require('../serverUtils/protocol');
 const app = express();
 
 // Body Parser
@@ -21,5 +22,6 @@ freePorts.getPort().then((PORT_POST) => {
         app.listen(PORT_POST, () => {
             console.log(`🚀 RKTCP Configuration up on port ${PORT_POST}`);
             open(`http://localhost:${PORT_POST}/`);
+            register();
         });
 });

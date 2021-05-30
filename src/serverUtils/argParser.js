@@ -1,6 +1,6 @@
 const { ArgumentParser } = require('argparse');
 const { version } = require('../../package.json');
-const { decodeUrl } = require('./protocol');
+const UrlParser = require('./urlParser');
 
 const modes = ['listen', 'init', 'test'];
 const defaultMode = 'listen';
@@ -46,7 +46,7 @@ parser.add_argument('--show-diff', {
 
 const preProcess = (args) => {
     if (args.url) {
-        const newArgs = decodeUrl(args.url, modes, defaultMode);
+        const newArgs = UrlParser.parse(args.url, modes, defaultMode);
         Object.keys(newArgs).forEach((key) => {
             args[key] = newArgs[key];
         });

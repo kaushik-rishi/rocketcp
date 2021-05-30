@@ -24,5 +24,8 @@ exports.decodeUrl = (url, modes, defaultMode) => {
             args.lang = parsed.query.lang;
         else throw new Error(chalk.red('Unknown lang : ' + parsed.query.lang));
     }
+    if (parsed.query.dir) {
+        args.dir = parsed.query.dir;
+    }
     return args;
 };

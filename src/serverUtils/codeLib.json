@@ -72,6 +72,10 @@
             "name":"Basic",
             "isFromFile":true,
             "content":"./templates/codes/java.java"
+        },{
+            "name":"Intermediate",
+            "isFromFile":true,
+            "content":"./templates/codes/javaInter.java"
         }]
     }
 }

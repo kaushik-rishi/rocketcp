@@ -33,5 +33,8 @@ exports.decodeUrl = (url, modes, defaultMode) => {
     if (parsed.query.interactive) {
         args.interactive = true;
     }
+    if (parsed.query['show-diff']) {
+        args['show-diff'] = true;
+    }
     return args;
 };

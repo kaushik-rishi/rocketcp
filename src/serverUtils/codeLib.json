@@ -1,4 +1,20 @@
 {
+    "bash":{
+        "name":"Bash",
+        "isinterpreted": false,
+        "fileName":"Main.sh",
+        "compile": "chmod +x Main.sh",
+        "comments":"# ",
+        "run": {
+            "win32": "Main.sh",
+            "unix": "./Main.sh"
+        },
+        "templates":[{
+            "name":"Basic",
+            "isFromFile":false,
+            "content":"echo 'Initiated...'"
+        }]
+    },
     "c":{
         "name":"C",
         "isinterpreted": false,

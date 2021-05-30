@@ -30,5 +30,8 @@ exports.decodeUrl = (url, modes, defaultMode) => {
     if (parsed.query.watch) {
         args.watch = true;
     }
+    if (parsed.query.interactive) {
+        args.interactive = true;
+    }
     return args;
 };

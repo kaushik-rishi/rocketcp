@@ -106,7 +106,7 @@ Things to figure out (way above my head as of now):
 ---
 
 -   The issue and PR's have linked templates, when you go ahead and create an issue or a PR please follow the template so that it will be easy for the maintainers to review your pull request or validate your issue
--   The project maintainer(s) will let you know if there is any merge conflict and then it's you're job to resolve the merge conflict by taking the help of the mentor.
+-   The project maintainer(s) will let you know if there is any merge conflict and then it's your job to resolve the merge conflict by taking the help of the mentor.
 
 ## Contributors:
 

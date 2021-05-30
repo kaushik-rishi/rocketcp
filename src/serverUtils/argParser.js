@@ -1,5 +1,9 @@
 const { ArgumentParser } = require('argparse');
 const { version } = require('../../package.json');
+const { decodeUrl } = require('./protocol');
+
+const modes = ['listen', 'init', 'test'];
+const defaultMode = 'listen';
 
 const parser = new ArgumentParser({
     description:
@@ -10,9 +14,9 @@ parser.add_argument('-v', '--version', { action: 'version', version });
 parser.add_argument('mode', {
     help: 'Allows the user to start RKTCP in different modes',
     type: String,
-    choices: ['listen', 'init', 'test'],
+    choices: modes,
     nargs: '?',
-    default: 'listen'
+    default: defaultMode
 });
 parser.add_argument('-l', '--lang', {
     help: 'OverRides the default language.',
@@ -21,6 +25,10 @@ parser.add_argument('-l', '--lang', {
 parser.add_argument('-d', '--dir', {
     type: 'str',
     help: 'OverRides the default directory of operations.'
+});
+parser.add_argument('-u', '--url', {
+    type: 'str',
+    help: 'Store the url when launched using browser.'
 });
 parser.add_argument('-w', '--watch', {
     action: 'store_true',
@@ -37,11 +45,16 @@ parser.add_argument('--show-diff', {
 });
 
 const preProcess = (args) => {
+    if (args.url) {
+        const newArgs = decodeUrl(args.url, modes, defaultMode);
+        Object.keys(newArgs).forEach((key) => {
+            args[key] = newArgs[key];
+        });
+    }
     if (args.lang) {
         global.config.defaultLanguage = args.lang;
     }
     if (args.dir) {
-        args.dir = args.dir.replace(/^["']+|["']+$/, '');
         global.config.mountPoint = args.dir;
     }
 

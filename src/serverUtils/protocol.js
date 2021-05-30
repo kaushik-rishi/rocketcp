@@ -27,5 +27,8 @@ exports.decodeUrl = (url, modes, defaultMode) => {
     if (parsed.query.dir) {
         args.dir = parsed.query.dir;
     }
+    if (parsed.query.watch) {
+        args.watch = true;
+    }
     return args;
 };

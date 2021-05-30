@@ -101,5 +101,20 @@
             "isFromFile":true,
             "content":"./templates/codes/javaAdv.java"
         }]
+    },
+    "node":{
+        "name":"NodeJs",
+        "isinterpreted": true,
+        "fileName":"Main.js",
+        "comments":"// ",
+        "run": {
+            "win32": "node Main.js",
+            "unix": "node Main.js"
+        },
+        "templates":[{
+            "name":"Basic",
+            "isFromFile":false,
+            "content":"console.log( 'Initiated...' );"
+        }]
     }
 }

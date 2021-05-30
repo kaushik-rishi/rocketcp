@@ -41,7 +41,6 @@ const preProcess = (args) => {
         global.config.defaultLanguage = args.lang;
     }
     if (args.dir) {
-        args.dir = args.dir.replace(/^["']+|["']+$/, '');
         global.config.mountPoint = args.dir;
     }
 

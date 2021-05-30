@@ -70,8 +70,8 @@
         },
         "templates":[{
             "name":"Basic",
-            "isFromFile":false,
-            "content":"import java.utils.*;"
+            "isFromFile":true,
+            "content":"./templates/codes/java.java"
         }]
     }
 }

@@ -1,5 +1,6 @@
 const { ArgumentParser } = require('argparse');
 const { version } = require('../../package.json');
+const { decodeUrl } = require('./protocol');
 
 const parser = new ArgumentParser({
     description:
@@ -22,6 +23,10 @@ parser.add_argument('-d', '--dir', {
     type: 'str',
     help: 'OverRides the default directory of operations.'
 });
+parser.add_argument('-u', '--url', {
+    type: 'str',
+    help: 'Store the url when launched using browser.'
+});
 parser.add_argument('-w', '--watch', {
     action: 'store_true',
     help: 'Used in test mode to run automatically when source code is updated'
@@ -37,6 +42,12 @@ parser.add_argument('--show-diff', {
 });
 
 const preProcess = (args) => {
+    if (args.url) {
+        const newArgs = decodeUrl(args.url);
+        Object.keys(newArgs).forEach((key) => {
+            args[key] = newArgs[key];
+        });
+    }
     if (args.lang) {
         global.config.defaultLanguage = args.lang;
     }

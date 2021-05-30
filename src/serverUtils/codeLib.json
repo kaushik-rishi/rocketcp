@@ -56,6 +56,10 @@
             "name":"Basic",
             "isFromFile":true,
             "content":"./templates/codes/python.py"
+        },{
+            "name":"Intermediate",
+            "isFromFile":true,
+            "content":"./templates/codes/pythonInter.py"
         }]
     },
     "java": {

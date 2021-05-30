@@ -2,6 +2,9 @@ const { ArgumentParser } = require('argparse');
 const { version } = require('../../package.json');
 const { decodeUrl } = require('./protocol');
 
+const modes = ['listen', 'init', 'test'];
+const defaultMode = 'listen';
+
 const parser = new ArgumentParser({
     description:
         'A command line client for parsing the test cases using the competitive companion extension and testing the users solution. 🎯'
@@ -11,9 +14,9 @@ parser.add_argument('-v', '--version', { action: 'version', version });
 parser.add_argument('mode', {
     help: 'Allows the user to start RKTCP in different modes',
     type: String,
-    choices: ['listen', 'init', 'test'],
+    choices: modes,
     nargs: '?',
-    default: 'listen'
+    default: defaultMode
 });
 parser.add_argument('-l', '--lang', {
     help: 'OverRides the default language.',
@@ -43,7 +46,7 @@ parser.add_argument('--show-diff', {
 
 const preProcess = (args) => {
     if (args.url) {
-        const newArgs = decodeUrl(args.url);
+        const newArgs = decodeUrl(args.url, modes, defaultMode);
         Object.keys(newArgs).forEach((key) => {
             args[key] = newArgs[key];
         });

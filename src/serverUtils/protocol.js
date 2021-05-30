@@ -1,5 +1,6 @@
 const ProtocolRegistry = require('protocol-registry');
 const chalk = require('chalk');
+const Url = require('url-parse');
 
 exports.register = () => {
     return ProtocolRegistry.register({
@@ -14,7 +15,8 @@ exports.register = () => {
     });
 };
 
-exports.decodeUrl = (url) => {
-    console.log(url);
-    return {};
+exports.decodeUrl = (url, modes, defaultMode) => {
+    const parsed = Url(url, true);
+    if (modes.includes(parsed.hostname)) defaultMode = parsed.hostname;
+    return { mode: defaultMode, ...parsed.query };
 };

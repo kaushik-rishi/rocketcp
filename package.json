@@ -54,6 +54,7 @@
         "ora": "^5.4.0",
         "protocol-registry": "^1.3.3",
         "shelljs": "^0.8.4",
+        "url-parse": "^1.5.1",
         "yargs": "^15.4.1"
     },
     "devDependencies": {
